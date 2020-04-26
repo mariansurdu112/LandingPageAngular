@@ -13,6 +13,7 @@ import { Modal6Component } from './components/modal6/modal6.component';
   declarations: [Modal1Component, Modal2Component, Modal3Component, Modal4Component, Modal5Component, Modal6Component],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [Modal1Component, Modal2Component, Modal3Component, Modal4Component, Modal5Component, Modal6Component],
 })
 export class SharedModule { }

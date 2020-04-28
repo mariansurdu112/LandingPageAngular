@@ -1,15 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ChartsModule as Ng2Charts } from 'ng2-charts';
+import { PageHeaderModule } from '../../shared/modules/page-header/page-header.module';
 
 import { ChartsRoutingModule } from './charts-routing.module';
 import { ChartsComponent } from './charts.component';
 
-
 @NgModule({
-  declarations: [ChartsComponent],
-  imports: [
-    CommonModule,
-    ChartsRoutingModule
-  ]
+    imports: [CommonModule, Ng2Charts, ChartsRoutingModule, PageHeaderModule],
+    declarations: [ChartsComponent]
 })
-export class ChartsModule { }
+export class ChartsModule {}

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
+  collapedSideBar: boolean;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  receiveCollapsed($event) {
+    this.collapedSideBar = $event;
   }
 
 }

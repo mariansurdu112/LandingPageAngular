@@ -13,6 +13,7 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ServicesComponent } from './components/services/services.component';
 import { TeamComponent } from './components/team/team.component';
 import { SharedModule } from '../shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent,
@@ -20,7 +21,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     LayoutRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ]
 })
 export class LayoutModule { }

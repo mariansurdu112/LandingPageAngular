@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../shared/guard';
+import { AuthGuard } from './shared';
+import { AdminComponent } from './admin.component';
+
 
 
 const routes: Routes = [
   {
+
     path: '',
-    loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule),
     canActivate: [AuthGuard]
   },
-  { path: 'login', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) },
-  {
-    path: 'error',
-    loadChildren: () => import('../server-error/server-error.module').then((m) => m.ServerErrorModule)
-  },
-  { path: 'not-found', loadChildren: () => import('../not-found/not-found.module').then((m) => m.NotFoundModule) },
+  { path: 'login', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) }
+
 ];
 
 @NgModule({

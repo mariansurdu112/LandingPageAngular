@@ -1,22 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { LoginComponent } from './login.component';
-import { LoginModule } from './login.module';
+import { PageHeaderComponent } from './page-header.component';
+import { PageHeaderModule } from './page-header.module';
 
-describe('LoginComponent', () => {
-    let component: LoginComponent;
-    let fixture: ComponentFixture<LoginComponent>;
+describe('PageHeaderComponent', () => {
+    let component: PageHeaderComponent;
+    let fixture: ComponentFixture<PageHeaderComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [LoginModule, RouterTestingModule, BrowserAnimationsModule]
+            imports: [PageHeaderModule, RouterTestingModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LoginComponent);
+        fixture = TestBed.createComponent(PageHeaderComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

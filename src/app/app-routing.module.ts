@@ -6,12 +6,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule),
-    // canActivate: [AuthGuard]
   },
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
-    // canActivate: [AuthGuard]
   },
   {
     path: 'error',
@@ -20,10 +18,7 @@ const routes: Routes = [
   {
     path: 'access-denied',
     loadChildren: () => import('./access-denied/access-denied.module').then((m) => m.AccessDeniedModule)
-  },
-  { path: 'not-found', loadChildren: () => import('./not-found/not-found.module').then((m) => m.NotFoundModule) },
-
-  { path: '**', redirectTo: 'not-found' }
+  }
 ];
 
 @NgModule({

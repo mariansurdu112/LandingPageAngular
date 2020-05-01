@@ -14,9 +14,10 @@ import { ServicesComponent } from './components/services/services.component';
 import { TeamComponent } from './components/team/team.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NewsComponent } from './components/news/news.component';
 
 @NgModule({
-  declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent,
+  declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent, NewsComponent,
     FooterComponent, AboutComponent, ClientsComponent, ContactComponent, PortfolioComponent, ServicesComponent, TeamComponent],
   imports: [
     CommonModule,

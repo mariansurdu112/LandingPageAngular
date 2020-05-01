@@ -6,12 +6,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule),
-    // canActivate: [AuthGuard]
   },
   {
     path: 'admin',
-    loadChildren: () => import('./administration/administration.module').then((m) => m.AdministrationModule),
-    // canActivate: [AuthGuard]
+    loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'error',

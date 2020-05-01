@@ -15,10 +15,13 @@ import { TeamComponent } from './components/team/team.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewsComponent } from './components/news/news.component';
+import { DealsComponent } from './components/deals/deals.component';
+import { PromoCampaignComponent } from './components/promo-campaign/promo-campaign.component';
 
 @NgModule({
-  declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent, NewsComponent,
-    FooterComponent, AboutComponent, ClientsComponent, ContactComponent, PortfolioComponent, ServicesComponent, TeamComponent],
+  declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent, NewsComponent, DealsComponent,
+    FooterComponent, PromoCampaignComponent, AboutComponent,
+    ClientsComponent, ContactComponent, PortfolioComponent, ServicesComponent, TeamComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,

@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./locations.component.scss']
 })
 export class LocationsComponent implements OnInit {
-
+  lat = -23.8779431;
+  lng = -49.8046873;
+  zoom = 15;
   constructor() { }
 
   ngOnInit(): void {

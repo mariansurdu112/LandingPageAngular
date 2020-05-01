@@ -17,16 +17,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewsComponent } from './components/news/news.component';
 import { DealsComponent } from './components/deals/deals.component';
 import { PromoCampaignComponent } from './components/promo-campaign/promo-campaign.component';
+import { LocationsComponent } from './components/locations/locations.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent, NewsComponent, DealsComponent,
     FooterComponent, PromoCampaignComponent, AboutComponent,
-    ClientsComponent, ContactComponent, PortfolioComponent, ServicesComponent, TeamComponent],
+    ClientsComponent, LocationsComponent, ContactComponent, PortfolioComponent, ServicesComponent, TeamComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     SharedModule,
-    NgbModule
+    NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAZTauhdYAPg-I4dGA451ss7WM8oGsACqY'
+    })
   ]
 })
 export class LayoutModule { }

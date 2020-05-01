@@ -53,7 +53,7 @@ export function slideToBottom() {
     ]);
 }
 
-export function slideToTop() { 
+export function slideToTop() {
     return trigger('routerTransition', [
         state('void', style({})),
         state('*', style({})),

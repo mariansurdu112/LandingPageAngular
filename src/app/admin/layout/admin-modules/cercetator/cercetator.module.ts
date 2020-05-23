@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CercetatorRoutingModule } from './cercetator-routing.module';
 import { CercetatorComponent } from './cercetator.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CercetatorService } from './cercetator.service';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CercetatorRoutingModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [CercetatorService]
 })
 export class CercetatorModule { }

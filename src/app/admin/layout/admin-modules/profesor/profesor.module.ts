@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProfesorRoutingModule } from './profesor-routing.module';
 import { ProfesorComponent } from './profesor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfesorService } from './profesor.service';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ProfesorRoutingModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [ProfesorService]
 })
 export class ProfesorModule { }

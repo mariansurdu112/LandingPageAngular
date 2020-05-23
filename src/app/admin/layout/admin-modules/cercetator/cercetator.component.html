@@ -1,40 +1,78 @@
- <button class="btn btn-info" (click)="editSection()">Edit</button>
- <section class="page-section" id="services">
+ <button class="btn btn-info" (click)="editSection(content)">Edit</button>
+ <button class="btn btn-success" (click)="addCercetatorData(contentCercetator)">Add new data</button>
+ <section class="page-section">
    <div class="container">
      <div class="row">
        <div class="col-lg-12 text-center">
-         <h2 class="section-heading text-uppercase">Services</h2>
-         <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+         <h2 class="section-heading text-uppercase">{{cercetatorData.title}}</h2>
+         <h3 class="section-subheading text-muted">{{cercetatorData.subtitle}}</h3>
        </div>
      </div>
      <div class="row text-center">
-       <div class="col-md-4">
+
+       <div class="col-md-4" *ngFor="let item of cercetatorData.items">
          <span class="fa-stack fa-4x">
            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-           <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+           <i class="fas {{item.icon}} fa-stack-1x fa-inverse"></i>
          </span>
-         <h4 class="service-heading">E-Commerce</h4>
-         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
-           quo inventore harum ex magni, dicta impedit.</p>
+         <h4 class="service-heading">{{item.title}}</h4>
+         <p class="text-muted">{{item.mainDescription}}</p>
        </div>
-       <div class="col-md-4">
-         <span class="fa-stack fa-4x">
-           <i class="fas fa-circle fa-stack-2x text-primary"></i>
-           <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-         </span>
-         <h4 class="service-heading">Responsive Design</h4>
-         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
-           quo inventore harum ex magni, dicta impedit.</p>
-       </div>
-       <div class="col-md-4">
-         <span class="fa-stack fa-4x">
-           <i class="fas fa-circle fa-stack-2x text-primary"></i>
-           <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-         </span>
-         <h4 class="service-heading">Web Security</h4>
-         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
-           quo inventore harum ex magni, dicta impedit.</p>
-       </div>
+
+
      </div>
    </div>
  </section>
+
+ <ng-template #content let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <p>Edit</p>
+   </div>
+   <div class="modal-body">
+     <form [formGroup]="cercetatorForm" (ngSubmit)="save(cercetatorForm.value)">
+       <div class="form-group">
+         <label for="title">Main title:</label>
+         <input type="text" class="form-control" placeholder="Title" id="title" formControlName="mainTitle">
+       </div>
+       <div class="form-group">
+         <label for="subtitle">Subtitle:</label>
+         <input type="text" class="form-control" placeholder="Subtitle" id="subtitle" formControlName="subTitle">
+       </div>
+       <button type="submit" class="btn btn-primary" [disabled]="!cercetatorForm.valid">Save</button>
+     </form>
+   </div>
+
+   <div class="modal-footer">
+     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+   </div>
+ </ng-template>
+
+ <ng-template #contentCercetator let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <p>Add story point</p>
+   </div>
+   <div class="modal-body">
+     <form [formGroup]="cercetatorItemsForm" (ngSubmit)="saveStoryPoint(cercetatorItemsForm.value)">
+       <div class="form-group">
+         <label for="title">Title:</label>
+         <input type="text" class="form-control" placeholder="Title" id="title" formControlName="title">
+       </div>
+       <div class="form-group">
+         <label for="mainDescription">Main Description:</label>
+         <textarea class="form-control" id="mainDescription" rows="3" placeholder="Main Description"
+           id="mainDescription" formControlName="mainDescription"></textarea>
+       </div>
+       <div class="form-group">
+         <label for="icon">Icon:</label>
+         <input type="text" class="form-control" placeholder="Icon" id="icon" formControlName="icon">
+         <a href="https://fontawesome.bootstrapcheatsheets.com/">Find icons here</a>
+       </div>
+
+       <button type="submit" class="btn btn-primary" [disabled]="!cercetatorItemsForm.valid">Save</button>
+     </form>
+   </div>
+
+   <div class="modal-footer">
+     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+   </div>
+ </ng-template>

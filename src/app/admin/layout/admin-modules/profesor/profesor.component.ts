@@ -45,7 +45,7 @@ export class ProfesorComponent implements OnInit {
   constructor(private modalService: NgbModal) {
 
   }
-  editSection(content: any) {
+  open(content: any) {
     this.modalService.open(content).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -55,16 +55,7 @@ export class ProfesorComponent implements OnInit {
       }
     );
   }
-  addStoryPoint(contentStory: any) {
-    this.modalService.open(contentStory).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      }
-    );
-  }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

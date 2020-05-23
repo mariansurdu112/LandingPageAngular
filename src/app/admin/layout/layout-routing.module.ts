@@ -20,24 +20,6 @@ const routes: Routes = [
             { path: 'criba', loadChildren: () => import('./admin-modules/criba/criba.module').then((m) => m.CribaModule) },
             { path: 'om', loadChildren: () => import('./admin-modules/om/om.module').then((m) => m.OmModule) },
             { path: 'profesor', loadChildren: () => import('./admin-modules/profesor/profesor.module').then((m) => m.ProfesorModule) },
-
-            // admin dashboard component routes
-            { path: 'charts', loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule) },
-            { path: 'tables', loadChildren: () => import('./tables/tables.module').then((m) => m.TablesModule) },
-            { path: 'forms', loadChildren: () => import('./form/form.module').then((m) => m.FormModule) },
-            {
-                path: 'bs-element',
-                loadChildren: () => import('./bs-element/bs-element.module').then((m) => m.BsElementModule)
-            },
-            { path: 'grid', loadChildren: () => import('./grid/grid.module').then((m) => m.GridModule) },
-            {
-                path: 'components',
-                loadChildren: () => import('./bs-component/bs-component.module').then((m) => m.BsComponentModule)
-            },
-            {
-                path: 'blank-page',
-                loadChildren: () => import('./blank-page/blank-page.module').then((m) => m.BlankPageModule)
-            }
         ]
     }
 ];

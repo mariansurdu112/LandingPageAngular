@@ -18,7 +18,7 @@ export class CercetatorComponent implements OnInit {
       { title: 'title', mainDescription: 'main desc', icon: 'something' },
       { title: 'title', mainDescription: 'main desc', icon: 'something' },
       { title: 'title', mainDescription: 'main desc', icon: 'something' }
-  ]
+    ]
   };
   cercetatorForm = new FormGroup({
     mainTitle: new FormControl('', Validators.required),
@@ -37,7 +37,7 @@ export class CercetatorComponent implements OnInit {
 
   }
 
-  editSection(content: any) {
+  open(content: any) {
     this.modalService.open(content).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -47,16 +47,7 @@ export class CercetatorComponent implements OnInit {
       }
     );
   }
-  addCercetatorData(contentStory: any) {
-    this.modalService.open(contentStory).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      }
-    );
-  }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -69,14 +60,14 @@ export class CercetatorComponent implements OnInit {
   }
 
   save(data: any) {
-     console.log(data);
-     this.cercetatorData.title = data.mainTitle;
-     this.cercetatorData.subtitle = data.subTitle;
+    console.log(data);
+    this.cercetatorData.title = data.mainTitle;
+    this.cercetatorData.subtitle = data.subTitle;
   }
 
   saveStoryPoint(data: ServiceItem) {
-     console.log(data);
-     this.cercetatorData.items.push(data);
+    console.log(data);
+    this.cercetatorData.items.push(data);
   }
 
 }

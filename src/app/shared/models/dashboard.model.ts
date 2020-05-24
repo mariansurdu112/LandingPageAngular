@@ -1,5 +1,5 @@
 export class DashboardModel {
     mainTitle: string;
-    subtitle: string;
+    mainSubtitle: string;
     mainPicture: string;
 }

@@ -11,10 +11,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
     animations: [routerTransition()]
 })
 export class DashboardComponent implements OnInit {
-    dashboardData: DashboardModel = { mainTitle: 'Main title', subtitle: 'Sub title', mainPicture: '' };
+    dashboardData: DashboardModel = { mainTitle: 'Main title', mainSubtitle: 'Sub title', mainPicture: 'header-bg.jpg' };
     dashboardForm = new FormGroup({
         mainTitle: new FormControl('', Validators.required),
-        subTitle: new FormControl('', Validators.required),
+        mainSubtitle: new FormControl('', Validators.required),
+        mainPicture: new FormControl('', Validators.required)
     });
     closeResult: string;
     constructor(private modalService: NgbModal) {
@@ -43,6 +44,7 @@ export class DashboardComponent implements OnInit {
 
     save(data: any) {
         console.log(data);
+        this.dashboardData = data;
     }
 
 

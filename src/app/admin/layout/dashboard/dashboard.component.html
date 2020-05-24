@@ -1,9 +1,9 @@
 <div [@routerTransition]>
   <button class="btn btn-info" (click)="editSection(content)">Edit</button>
-  <header class="masthead">
+  <header class="masthead" [ngStyle]="{'background-image': 'url(' + dashboardData.mainPicture + ')'}">
     <div class="container">
       <div class="intro-text">
-        <div class="intro-lead-in">{{dashboardData.subtitle}}</div>
+        <div class="intro-lead-in">{{dashboardData.mainSubtitle}}</div>
         <div class="intro-heading text-uppercase">{{dashboardData.mainTitle}}</div>
       </div>
     </div>
@@ -23,9 +23,12 @@
       </div>
       <div class="form-group">
         <label for="subtitle">Subtitle:</label>
-        <input type="text" class="form-control" placeholder="Subtitle" id="subtitle" formControlName="subTitle">
+        <input type="text" class="form-control" placeholder="Subtitle" id="subtitle" formControlName="mainSubtitle">
       </div>
-      <p style="color:red"> Add picture upload</p>
+      <div class="form-group">
+        <label for="picture">Main Photo:</label>
+        <input type="text" class="form-control" placeholder="Picture" id="picture" formControlName="mainPicture">
+      </div>
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
   </div>

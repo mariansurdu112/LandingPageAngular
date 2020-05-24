@@ -10,6 +10,13 @@ import { LanguageTranslationModule } from './modules/language-translation/langua
 import { PageHeaderModule } from './modules/page-header/page-header.module';
 import { StatModule } from './modules/stat/stat.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
+import { ArhitectService } from './services/arhitect.service';
+import { CercetatorService } from './services/cercetator.service';
+import { ContactService } from './services/contact.service';
+import { CribaService } from './services/criba.service';
+import { DashboardService } from './services/dashboard.service';
+import { OmService } from './services/om.service';
+import { ProfesorService } from './services/professor.service';
 
 
 
@@ -22,6 +29,7 @@ import { SharedPipesModule } from './pipes/shared-pipes.module';
     StatModule,
     SharedPipesModule
   ],
+  providers: [ArhitectService, CercetatorService, ContactService, CribaService, DashboardService, OmService, ProfesorService],
   exports: [Modal1Component, Modal2Component, Modal3Component, Modal4Component, Modal5Component, Modal6Component],
 })
 export class SharedModule { }

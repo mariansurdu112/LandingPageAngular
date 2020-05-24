@@ -7,9 +7,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-    imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
+    imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule, SharedModule],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent]
 })
-export class LayoutModule {}
+export class LayoutModule { }

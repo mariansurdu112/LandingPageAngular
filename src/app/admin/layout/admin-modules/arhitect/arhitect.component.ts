@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CercetatorSectionModel } from 'src/app/shared/models/cercetator-section.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ServiceItem } from 'src/app/shared/models/service-item.model';
 import { ArhitectSectionModel } from 'src/app/shared/models/arhitect.model';
 import { PortfolioItemModel } from 'src/app/shared/models/portfolio-item.model';
-
+import {ArhitectService} from 'src/app/shared/services/arhitect.service';
 @Component({
   selector: 'app-arhitect',
   templateUrl: './arhitect.component.html',
@@ -41,7 +39,7 @@ export class ArhitectComponent implements OnInit {
     date: new FormControl('', Validators.required)
   });
   closeResult: string;
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private architectService: ArhitectService) {
 
   }
   ngOnInit(): void {

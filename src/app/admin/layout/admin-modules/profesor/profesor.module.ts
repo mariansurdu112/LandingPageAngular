@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ProfesorRoutingModule } from './profesor-routing.module';
 import { ProfesorComponent } from './profesor.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProfesorService } from './profesor.service';
 import { ProfesorEditComponent } from './components/profesor-edit/profesor-edit.component';
 import { ProfesorItemAddComponent } from './components/profesor-item-add/profesor-item-add.component';
 import { ProfesorItemEditComponent } from './components/profesor-item-edit/profesor-item-edit.component';
@@ -16,7 +15,6 @@ import { ProfesorItemEditComponent } from './components/profesor-item-edit/profe
     CommonModule,
     ProfesorRoutingModule,
     ReactiveFormsModule
-  ],
-  providers: [ProfesorService]
+  ]
 })
 export class ProfesorModule { }

@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CercetatorSectionModel } from 'src/app/shared/models/cercetator-section.model';
 import { ServiceItem } from 'src/app/shared/models/service-item.model';
+import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 
 @Component({
   selector: 'app-cercetator',
@@ -11,7 +12,8 @@ import { ServiceItem } from 'src/app/shared/models/service-item.model';
   styleUrls: ['./cercetator.component.scss']
 })
 export class CercetatorComponent implements OnInit {
-
+  currentSelectedItem: StoryItemModel;
+  currentIndex: number;
   cercetatorData: CercetatorSectionModel = {
     title: 'Profesor', subtitle: 'Subtitle', items: [
       { title: 'title', mainDescription: 'main desc', icon: 'fa-laptop' },
@@ -29,6 +31,12 @@ export class CercetatorComponent implements OnInit {
     mainDescription: new FormControl('', Validators.required),
     icon: new FormControl('', Validators.required)
   });
+
+  cercetatorItemsFormEdit = new FormGroup({
+    title: new FormControl('', Validators.required),
+    mainDescription: new FormControl('', Validators.required),
+    icon: new FormControl('', Validators.required)
+  });
   closeResult: string;
   constructor(private modalService: NgbModal) {
 
@@ -37,7 +45,12 @@ export class CercetatorComponent implements OnInit {
 
   }
 
-  open(content: any) {
+  open(content: any, item?: any, index?: number) {
+    if (item) {
+      this.currentSelectedItem = item;
+      this.cercetatorItemsFormEdit.setValue(this.currentSelectedItem);
+      this.currentIndex = index;
+    }
     this.modalService.open(content).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -68,6 +81,14 @@ export class CercetatorComponent implements OnInit {
   saveStoryPoint(data: ServiceItem) {
     console.log(data);
     this.cercetatorData.items.push(data);
+  }
+
+  saveStoryPointItemEdit(data: ServiceItem ) {
+    this.cercetatorData.items[this.currentIndex] = data;
+  }
+
+  remove(index: number) {
+    this.cercetatorData.items.splice(index, 1);
   }
 
 }

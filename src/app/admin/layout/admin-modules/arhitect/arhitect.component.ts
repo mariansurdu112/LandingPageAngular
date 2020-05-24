@@ -13,6 +13,7 @@ import { PortfolioItemModel } from 'src/app/shared/models/portfolio-item.model';
 })
 export class ArhitectComponent implements OnInit {
   currentSelectedItem: PortfolioItemModel;
+  currentIndex: number;
   arhitectData: ArhitectSectionModel = {
     title: 'Arhitect', subtitle: 'something', items: [
       { title: 'title', subtitle: 'main desc', photo: 'assets/img/portfolio/01-thumbnail.jpg', description: 'xxx', date: new Date() },
@@ -32,6 +33,13 @@ export class ArhitectComponent implements OnInit {
     description: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required)
   });
+  arhitectItemsFormEdit = new FormGroup({
+    title: new FormControl('', Validators.required),
+    subtitle: new FormControl('', Validators.required),
+    photo: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required)
+  });
   closeResult: string;
   constructor(private modalService: NgbModal) {
 
@@ -40,9 +48,11 @@ export class ArhitectComponent implements OnInit {
 
   }
 
-  open(content: any, item?: any) {
+  open(content: any, item?: any, index?: number) {
     if (item) {
       this.currentSelectedItem = item;
+      this.arhitectItemsFormEdit.setValue(this.currentSelectedItem);
+      this.currentIndex = index;
     }
     this.modalService.open(content).result.then(
       (result) => {
@@ -74,6 +84,14 @@ export class ArhitectComponent implements OnInit {
   saveArhitectItem(data: PortfolioItemModel) {
     console.log(data);
     this.arhitectData.items.push(data);
+  }
+
+  saveArhitectItemEdit(data: PortfolioItemModel) {
+    this.arhitectData.items[this.currentIndex] = data;
+  }
+
+  remove(index: number) {
+    this.arhitectData.items.splice(index, 1);
   }
 
 

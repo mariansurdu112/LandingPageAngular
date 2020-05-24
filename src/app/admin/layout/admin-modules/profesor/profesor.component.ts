@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfesorSectionModel } from 'src/app/shared/models/professor-section.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 
 @Component({
   selector: 'app-profesor',
@@ -9,7 +10,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./profesor.component.scss']
 })
 export class ProfesorComponent implements OnInit {
-
+  currentSelectedItem: StoryItemModel;
+  currentIndex: number;
   profesorData: ProfesorSectionModel = {
     title: 'Profesor', subtitle: 'Subtitle',
     storyItems: [
@@ -24,7 +26,7 @@ export class ProfesorComponent implements OnInit {
         endYear: 1943, mainDescription: 'main description'
       },
       {
-        startYear: 1994, id: 1, fullDetails: '',
+        startYear: 1994, id: 1, fullDetails: 'ss',
         photoUrl: 'assets/img/about/3.jpg', title: 'Our humble beggining',
         endYear: 1943, mainDescription: 'main description'
       }]
@@ -41,11 +43,26 @@ export class ProfesorComponent implements OnInit {
     title: new FormControl('', Validators.required),
     photoUrl: new FormControl('', Validators.required)
   });
+
+  storyPointFormEdit = new FormGroup({
+    id: new FormControl(''),
+    startYear: new FormControl('', Validators.required),
+    endYear: new FormControl('', Validators.required),
+    fullDetails: new FormControl('', Validators.required),
+    mainDescription: new FormControl('', Validators.required),
+    title: new FormControl('', Validators.required),
+    photoUrl: new FormControl('', Validators.required)
+  });
   closeResult: string;
   constructor(private modalService: NgbModal) {
 
   }
-  open(content: any) {
+  open(content: any, item?: any, index?: number) {
+    if (item) {
+      this.currentSelectedItem = item;
+      this.storyPointFormEdit.setValue(this.currentSelectedItem);
+      this.currentIndex = index;
+    }
     this.modalService.open(content).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -76,6 +93,14 @@ export class ProfesorComponent implements OnInit {
   saveStoryPoint(data: any) {
     console.log(data);
     this.profesorData.storyItems.push(data);
+  }
+
+  saveStoryPointItemEdit(data: StoryItemModel) {
+    this.profesorData.storyItems[this.currentIndex] = data;
+  }
+
+  remove(index: number) {
+    this.profesorData.storyItems.splice(index, 1);
   }
 
 

@@ -23,8 +23,13 @@
                 </div>
                 <div class="timeline-body">
                   <p class="text-muted">{{storyItem.mainDescription}}</p>
+                  <div style="text-align: center;">
+                    <button class="btn btn-success btn-sm" (click)="open(contentStoryEdit,storyItem,i)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="remove(i)">Remove</button>
+                  </div>
                 </div>
               </div>
+               
             </li>
             <li class="timeline-inverted">
               <div class="timeline-image">
@@ -105,3 +110,48 @@
       <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
     </div>
   </ng-template>
+
+
+   <ng-template #contentStoryEdit let-c="close" let-d="dismiss">
+     <div class="modal-header">
+       <p>Edit story point</p>
+     </div>
+     <div class="modal-body">
+       <form [formGroup]="storyPointFormEdit" (ngSubmit)="saveStoryPointItemEdit(storyPointFormEdit.value)">
+         <div class="form-group">
+           <label for="startYear">Start Year:</label>
+           <input type="number" class="form-control" placeholder="Start Year" id="startYear"
+             formControlName="startYear">
+         </div>
+         <div class="form-group">
+           <label for="endYear">End Year:</label>
+           <input type="number" class="form-control" placeholder="End Year" id="endYear" formControlName="endYear">
+         </div>
+         <div class="form-group">
+           <label for="title">Title:</label>
+           <input type="text" class="form-control" placeholder="Title" id="title" formControlName="title">
+         </div>
+         <div class="form-group">
+           <label for="title">Main Description:</label>
+           <input type="text" class="form-control" placeholder="Main Description" id="mainDescription"
+             formControlName="mainDescription">
+         </div>
+         <div class="form-group">
+           <label for="photoUrl">Photo Url:</label>
+           <input type="text" class="form-control" placeholder="Photo Url" id="photoUrl" formControlName="photoUrl">
+         </div>
+         <div class="form-group">
+           <label for="fullDetails">Full Details:</label>
+           <textarea class="form-control" id="fullDetails" rows="3" placeholder="Full Details" id="fullDetails"
+             formControlName="fullDetails"></textarea>
+
+         </div>
+         <p style="color:red"> Add picture upload</p>
+         <button type="submit" class="btn btn-primary" [disabled]="!storyPointFormEdit.valid">Save</button>
+       </form>
+     </div>
+
+     <div class="modal-footer">
+       <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+     </div>
+   </ng-template>

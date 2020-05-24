@@ -9,14 +9,17 @@
        </div>
      </div>
      <div class="row text-center">
-
-       <div class="col-md-4" *ngFor="let item of cercetatorData.items">
+       <div class="col-md-4" *ngFor="let item of cercetatorData.items;let i = index">
          <span class="fa-stack fa-4x">
            <i class="fas fa-circle fa-stack-2x text-primary"></i>
            <i class="fas {{item.icon}} fa-stack-1x fa-inverse"></i>
          </span>
          <h4 class="service-heading">{{item.title}}</h4>
          <p class="text-muted">{{item.mainDescription}}</p>
+         <div style="text-align: center;">
+           <button class="btn btn-success btn-sm" (click)="open(contentCercetatorEdit,item,i)">Edit</button>
+           <button class="btn btn-danger btn-sm" (click)="remove(i)">Remove</button>
+         </div>
        </div>
 
 
@@ -69,6 +72,37 @@
        </div>
 
        <button type="submit" class="btn btn-primary" [disabled]="!cercetatorItemsForm.valid">Save</button>
+     </form>
+   </div>
+
+   <div class="modal-footer">
+     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+   </div>
+ </ng-template>
+
+
+ <ng-template #contentCercetatorEdit let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <p>Add story point</p>
+   </div>
+   <div class="modal-body">
+     <form [formGroup]="cercetatorItemsFormEdit" (ngSubmit)="saveStoryPointItemEdit(cercetatorItemsFormEdit.value)">
+       <div class="form-group">
+         <label for="title">Title:</label>
+         <input type="text" class="form-control" placeholder="Title" id="title" formControlName="title">
+       </div>
+       <div class="form-group">
+         <label for="mainDescription">Main Description:</label>
+         <textarea class="form-control" id="mainDescription" rows="3" placeholder="Main Description"
+           id="mainDescription" formControlName="mainDescription"></textarea>
+       </div>
+       <div class="form-group">
+         <label for="icon">Icon:</label>
+         <input type="text" class="form-control" placeholder="Icon" id="icon" formControlName="icon">
+         <a href="https://fontawesome.bootstrapcheatsheets.com/">Find icons here</a>
+       </div>
+
+       <button type="submit" class="btn btn-primary" [disabled]="!cercetatorItemsFormEdit.valid">Save</button>
      </form>
    </div>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CribaService } from 'src/app/shared/services/criba.service';
 
 @Component({
   selector: 'app-criba',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CribaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cribaService: CribaService) { }
 
   ngOnInit(): void {
   }

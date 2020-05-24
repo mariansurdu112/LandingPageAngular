@@ -3,6 +3,7 @@ import { ProfesorSectionModel } from 'src/app/shared/models/professor-section.mo
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
+import { ProfesorService } from 'src/app/shared/services/professor.service';
 
 @Component({
   selector: 'app-profesor',
@@ -54,7 +55,7 @@ export class ProfesorComponent implements OnInit {
     photoUrl: new FormControl('', Validators.required)
   });
   closeResult: string;
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private profesorService: ProfesorService) {
 
   }
   open(content: any, item?: any, index?: number) {

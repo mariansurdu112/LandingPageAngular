@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CercetatorSectionModel } from 'src/app/shared/models/cercetator-section.model';
 import { ServiceItem } from 'src/app/shared/models/service-item.model';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
+import { CercetatorService } from 'src/app/shared/services/cercetator.service';
 
 @Component({
   selector: 'app-cercetator',
@@ -38,7 +39,7 @@ export class CercetatorComponent implements OnInit {
     icon: new FormControl('', Validators.required)
   });
   closeResult: string;
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private cercetatorService: CercetatorService) {
 
   }
   ngOnInit(): void {

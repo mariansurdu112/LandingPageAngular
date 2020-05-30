@@ -16,27 +16,29 @@ const httpOptions = {
 })
 export class CercetatorService {
   private appHost: string;
-  private resourceGetData: string;
-  private resourceSaveDetails: string;
-  private resourceSaveItems: string;
-  private resourceEditItem: string;
+  private resource = 'api/CercetatorAsync';
+  private resourceServiceItem = 'api/CercetatorAsync/AddServiceItem';
   constructor(private http: HttpClient) {
     this.appHost = environment.host;
   }
 
-  getData(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceGetData, data, httpOptions);
+  getData(): Observable<any> {
+    return this.http.get(this.appHost + this.resource);
   }
 
-  saveDetails(): Observable<any> {
-    return this.http.get(this.appHost + this.resourceSaveDetails, httpOptions);
+  saveServiceItem(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resourceServiceItem, data, httpOptions);
   }
 
-  saveItems(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceSaveItems, data, httpOptions);
+  saveServiceItemEdit(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resourceServiceItem, data, httpOptions);
+  }
+
+  removeServiceItem(id: number): Observable<any> {
+    return this.http.delete(this.appHost + this.resourceServiceItem + id, httpOptions);
   }
 
   saveEdit(data: any, id: number): Observable<any> {
-    return this.http.post(this.appHost + this.resourceEditItem + id, data, httpOptions);
+    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
   }
 }

@@ -16,27 +16,16 @@ const httpOptions = {
 })
 export class CribaService {
   private appHost: string;
-  private resourceGetData: string;
-  private resourceSaveDetails: string;
-  private resourceSaveItems: string;
-  private resourceEditItem: string;
+  private resource = 'api/CribaAsync';
   constructor(private http: HttpClient) {
     this.appHost = environment.host;
   }
 
-  getData(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceGetData, data, httpOptions);
-  }
-
-  saveDetails(): Observable<any> {
-    return this.http.get(this.appHost + this.resourceSaveDetails, httpOptions);
-  }
-
-  saveItems(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceSaveItems, data, httpOptions);
+  getData(): Observable<any> {
+    return this.http.get(this.appHost + this.resource);
   }
 
   saveEdit(data: any, id: number): Observable<any> {
-    return this.http.post(this.appHost + this.resourceEditItem + id, data, httpOptions);
+    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
   }
 }

@@ -16,27 +16,16 @@ const httpOptions = {
 })
 export class ContactService {
   private appHost: string;
-  private resourceGetData: string;
-  private resourceSaveDetails: string;
-  private resourceSaveItems: string;
-  private resourceEditItem: string;
+  private resource = 'api/ContactAsync';
   constructor(private http: HttpClient) {
     this.appHost = environment.host;
   }
 
-  getData(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceGetData, data, httpOptions);
+  getData(): Observable<any> {
+    return this.http.get(this.appHost + this.resource);
   }
 
-  saveDetails(): Observable<any> {
-    return this.http.get(this.appHost + this.resourceSaveDetails, httpOptions);
-  }
-
-  saveItems(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceSaveItems, data, httpOptions);
-  }
-
-  saveEdit(data: any, id: number): Observable<any> {
-    return this.http.post(this.appHost + this.resourceEditItem + id, data, httpOptions);
+ saveEdit(data: any, id: number): Observable<any> {
+    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
   }
 }

@@ -56,7 +56,6 @@ export class ProfesorComponent implements OnInit {
   });
   closeResult: string;
   constructor(private modalService: NgbModal, private profesorService: ProfesorService) {
-
   }
   open(content: any, item?: any, index?: number) {
     if (item) {

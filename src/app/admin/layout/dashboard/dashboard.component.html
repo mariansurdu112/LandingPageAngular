@@ -1,7 +1,7 @@
 <div [@routerTransition]>
   <button class="btn btn-info" (click)="editSection(content)">Edit</button>
-  <header class="masthead" [ngStyle]="{'background-image': 'url(' + dashboardData.mainPicture + ')'}">
-    <div class="container">
+  <header class="masthead" *ngIf="dashboardData" [ngStyle]="{'background-image': 'url(' + dashboardData.mainPicture + ')'}">
+    <div class="container" *ngIf="dashboardData">
       <div class="intro-text">
         <div class="intro-lead-in">{{dashboardData.mainSubtitle}}</div>
         <div class="intro-heading text-uppercase">{{dashboardData.mainTitle}}</div>

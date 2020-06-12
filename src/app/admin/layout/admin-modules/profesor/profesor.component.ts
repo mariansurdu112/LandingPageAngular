@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 import { ProfesorService } from 'src/app/shared/services/professor.service';
 
+
 @Component({
   selector: 'app-profesor',
   templateUrl: './profesor.component.html',
@@ -13,25 +14,7 @@ import { ProfesorService } from 'src/app/shared/services/professor.service';
 export class ProfesorComponent implements OnInit {
   currentSelectedItem: StoryItemModel;
   currentIndex: number;
-  profesorData: ProfesorSectionModel = {
-    title: 'Profesor', subtitle: 'Subtitle',
-    storyItems: [
-      {
-        startYear: 1994, id: 1, fullDetails: '',
-        photoUrl: 'assets/img/about/5.jpg', title: 'Our humble beggining',
-        endYear: 1943, mainDescription: 'main description'
-      },
-      {
-        startYear: 1994, id: 1, fullDetails: '',
-        photoUrl: 'assets/img/about/4.jpg', title: 'Our humble beggining',
-        endYear: 1943, mainDescription: 'main description'
-      },
-      {
-        startYear: 1994, id: 1, fullDetails: 'ss',
-        photoUrl: 'assets/img/about/3.jpg', title: 'Our humble beggining',
-        endYear: 1943, mainDescription: 'main description'
-      }]
-  };
+  profesorData: ProfesorSectionModel;
   proffesorForm = new FormGroup({
     mainTitle: new FormControl('', Validators.required),
     subTitle: new FormControl('', Validators.required),
@@ -42,7 +25,8 @@ export class ProfesorComponent implements OnInit {
     fullDetails: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
-    photoUrl: new FormControl('', Validators.required)
+    photoUrl: new FormControl('', Validators.required),
+    professorId: new FormControl(''),
   });
 
   storyPointFormEdit = new FormGroup({
@@ -52,12 +36,19 @@ export class ProfesorComponent implements OnInit {
     fullDetails: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
-    photoUrl: new FormControl('', Validators.required)
+    photoUrl: new FormControl('', Validators.required),
+    professorId: new FormControl(''),
+    rowVersion: new FormControl('')
   });
   closeResult: string;
   constructor(private modalService: NgbModal, private profesorService: ProfesorService) {
+    this.getData();
   }
   open(content: any, item?: any, index?: number) {
+    if (this.profesorData) {
+      this.proffesorForm.setValue({ mainTitle: this.profesorData.title, subTitle: this.profesorData.subtitle });
+    }
+
     if (item) {
       this.currentSelectedItem = item;
       this.storyPointFormEdit.setValue(this.currentSelectedItem);
@@ -85,22 +76,66 @@ export class ProfesorComponent implements OnInit {
   }
 
   save(data: any) {
-    console.log(data);
-    this.profesorData.title = data.mainTitle;
-    this.profesorData.subtitle = data.subTitle;
+    if (this.profesorData) {
+      console.log(this.profesorData);
+      this.profesorService.saveEdit({
+        Id: this.profesorData.id, Title: data.mainTitle, Subtitle: data.subTitle,
+        RowVersion: this.profesorData.rowVersion
+      },
+        this.profesorData.id).subscribe(res => {
+          console.log(res);
+          this.profesorData = res;
+        });
+    }
+    else {
+      const dataToSend = { Title: data.mainTitle, Subtitle: data.subTitle };
+      this.profesorService.save(dataToSend).subscribe(res => {
+        console.log(res);
+        this.profesorData = res;
+      });
+    }
   }
 
   saveStoryPoint(data: any) {
     console.log(data);
-    this.profesorData.storyItems.push(data);
+    console.log(this.profesorData);
+    data.professorId = this.profesorData.id;
+    this.profesorService.saveStoryPointItem(data).subscribe(res => {
+      console.log(res);
+      if (!this.profesorData.storyItems) {
+        this.profesorData.storyItems = [];
+      }
+      this.profesorData.storyItems.push(res);
+      this.storyPointFormEdit.reset();
+    });
   }
 
   saveStoryPointItemEdit(data: StoryItemModel) {
     this.profesorData.storyItems[this.currentIndex] = data;
+    this.profesorService.saveStoryPointItemEdit(data).subscribe(res => {
+      console.log(res);
+      this.profesorData = res[0][0];
+      this.profesorData.storyItems = res[1];
+      this.storyPointFormEdit.setValue(this.profesorData.storyItems[this.currentIndex]);
+    });
   }
 
-  remove(index: number) {
-    this.profesorData.storyItems.splice(index, 1);
+  removeStoryPointItem(index: number) {
+    this.profesorService.removeStoryPointItem(this.profesorData.storyItems[index].id).subscribe(res => {
+      this.profesorData.storyItems.splice(index, 1);
+      console.log(res);
+    });
+  }
+
+  getData() {
+    this.profesorService.getData().subscribe(res => {
+      console.log(res);
+      this.profesorData = res[0][0];
+      if (!this.profesorData.storyItems){
+        this.profesorData.storyItems = [];
+      }
+      this.profesorData.storyItems = res[1];
+    });
   }
 
 

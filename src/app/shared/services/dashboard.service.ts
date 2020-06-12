@@ -21,11 +21,14 @@ export class DashboardService {
     this.appHost = environment.host;
   }
 
-  getData(data: any): Observable<any> {
-    return this.http.get(this.appHost + this.resource, data);
+  getData(): Observable<any> {
+    return this.http.get(this.appHost + this.resource);
   }
 
+  save(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resource, data, httpOptions);
+  }
   saveEdit(data: any, id: number): Observable<any> {
-    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
+    return this.http.put(this.appHost + this.resource + '/' + id, data, httpOptions);
   }
 }

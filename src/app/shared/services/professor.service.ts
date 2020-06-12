@@ -17,7 +17,7 @@ const httpOptions = {
 export class ProfesorService {
   private appHost: string;
   private resource = 'api/ProfessorAsync';
-  private resourceStoryItem = 'api/ProfessorAsync/AddStoryItem/';
+  private resourceStoryItem = 'api/ProfessorAsync/StoryItem/';
   constructor(private http: HttpClient) {
     this.appHost = environment.host;
   }
@@ -26,19 +26,24 @@ export class ProfesorService {
     return this.http.get(this.appHost + this.resource);
   }
 
-  savePortfolioItem(data: any): Observable<any> {
+  saveStoryPointItem(data: any): Observable<any> {
     return this.http.post(this.appHost + this.resourceStoryItem, data, httpOptions);
   }
 
-  savePortfolioItemEdit(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceStoryItem, data, httpOptions);
+  saveStoryPointItemEdit(data: any): Observable<any> {
+    console.log(data);
+    return this.http.put(this.appHost + this.resourceStoryItem  + data.id, data, httpOptions);
   }
 
-  removePortfolioItem(id: number): Observable<any> {
+  removeStoryPointItem(id: number): Observable<any> {
     return this.http.delete(this.appHost + this.resourceStoryItem + id, httpOptions);
   }
 
+  save(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resource, data, httpOptions);
+  }
+
   saveEdit(data: any, id: number): Observable<any> {
-    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
+    return this.http.put(this.appHost + this.resource + '/' + id, data, httpOptions);
   }
 }

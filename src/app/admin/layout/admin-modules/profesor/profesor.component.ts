@@ -41,7 +41,7 @@ export class ProfesorComponent implements OnInit {
     rowVersion: new FormControl('')
   });
   closeResult: string;
-  constructor(private modalService: NgbModal, private profesorService: ProfesorService) {
+  constructor(private modalService: NgbModal, private professorService: ProfesorService) {
     this.getData();
   }
   open(content: any, item?: any, index?: number) {
@@ -76,22 +76,41 @@ export class ProfesorComponent implements OnInit {
   }
 
   save(data: any) {
-    if (this.profesorData) {
-      console.log(this.profesorData);
-      this.profesorService.saveEdit({
+    console.log('x');
+    if (this.profesorData.id) {
+      this.professorService.saveEdit({
         Id: this.profesorData.id, Title: data.mainTitle, Subtitle: data.subTitle,
         RowVersion: this.profesorData.rowVersion
       },
         this.profesorData.id).subscribe(res => {
-          console.log(res);
-          this.profesorData = res;
+          this.profesorData = res[0][0];
+          if (res[0].length === 0) {
+            this.profesorData = new ProfesorSectionModel();
+            this.profesorData.title = '';
+            this.profesorData.subtitle = '';
+            this.profesorData.storyItems = [];
+          }
+          else {
+            this.profesorData = res[0][0];
+          }
+          this.profesorData.storyItems = res[1];
         });
     }
     else {
       const dataToSend = { Title: data.mainTitle, Subtitle: data.subTitle };
-      this.profesorService.save(dataToSend).subscribe(res => {
+      this.professorService.save(dataToSend).subscribe(res => {
         console.log(res);
-        this.profesorData = res;
+        this.profesorData = res[0][0];
+        if (res[0].length === 0) {
+          this.profesorData = new ProfesorSectionModel();
+          this.profesorData.title = '';
+          this.profesorData.subtitle = '';
+          this.profesorData.storyItems = [];
+        }
+        else {
+          this.profesorData = res[0][0];
+        }
+        this.profesorData.storyItems = res[1];
       });
     }
   }
@@ -100,19 +119,18 @@ export class ProfesorComponent implements OnInit {
     console.log(data);
     console.log(this.profesorData);
     data.professorId = this.profesorData.id;
-    this.profesorService.saveStoryPointItem(data).subscribe(res => {
+    this.professorService.saveStoryPointItem(data).subscribe(res => {
       console.log(res);
       if (!this.profesorData.storyItems) {
         this.profesorData.storyItems = [];
       }
       this.profesorData.storyItems.push(res);
-      this.storyPointFormEdit.reset();
+      this.storyPointForm.reset();
     });
   }
 
   saveStoryPointItemEdit(data: StoryItemModel) {
-    this.profesorData.storyItems[this.currentIndex] = data;
-    this.profesorService.saveStoryPointItemEdit(data).subscribe(res => {
+    this.professorService.saveStoryPointItemEdit(data).subscribe(res => {
       console.log(res);
       this.profesorData = res[0][0];
       this.profesorData.storyItems = res[1];
@@ -121,18 +139,24 @@ export class ProfesorComponent implements OnInit {
   }
 
   removeStoryPointItem(index: number) {
-    this.profesorService.removeStoryPointItem(this.profesorData.storyItems[index].id).subscribe(res => {
+    this.professorService.removeStoryPointItem(this.profesorData.storyItems[index].id).subscribe(res => {
       this.profesorData.storyItems.splice(index, 1);
       console.log(res);
     });
   }
 
   getData() {
-    this.profesorService.getData().subscribe(res => {
+    this.professorService.getData().subscribe(res => {
       console.log(res);
       this.profesorData = res[0][0];
-      if (!this.profesorData.storyItems){
+      if (res[0].length === 0) {
+        this.profesorData = new ProfesorSectionModel();
+        this.profesorData.title = '';
+        this.profesorData.subtitle = '';
         this.profesorData.storyItems = [];
+      }
+      else {
+        this.profesorData = res[0][0];
       }
       this.profesorData.storyItems = res[1];
     });

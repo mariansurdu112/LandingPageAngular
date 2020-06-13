@@ -17,28 +17,34 @@ const httpOptions = {
 export class CercetatorService {
   private appHost: string;
   private resource = 'api/CercetatorAsync';
-  private resourceServiceItem = 'api/CercetatorAsync/AddServiceItem';
+  private resourceItem = 'api/CercetatorAsync/Item/';
   constructor(private http: HttpClient) {
     this.appHost = environment.host;
   }
+
 
   getData(): Observable<any> {
     return this.http.get(this.appHost + this.resource);
   }
 
-  saveServiceItem(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceServiceItem, data, httpOptions);
+  saveItem(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resourceItem, data, httpOptions);
   }
 
-  saveServiceItemEdit(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourceServiceItem, data, httpOptions);
+  saveItemEdit(data: any): Observable<any> {
+    console.log(data);
+    return this.http.put(this.appHost + this.resourceItem + data.id, data, httpOptions);
   }
 
-  removeServiceItem(id: number): Observable<any> {
-    return this.http.delete(this.appHost + this.resourceServiceItem + id, httpOptions);
+  removeItem(id: number): Observable<any> {
+    return this.http.delete(this.appHost + this.resourceItem + id, httpOptions);
+  }
+
+  save(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resource, data, httpOptions);
   }
 
   saveEdit(data: any, id: number): Observable<any> {
-    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
+    return this.http.put(this.appHost + this.resource + '/' + id, data, httpOptions);
   }
 }

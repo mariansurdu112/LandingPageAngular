@@ -15,14 +15,7 @@ import { CercetatorService } from 'src/app/shared/services/cercetator.service';
 export class CercetatorComponent implements OnInit {
   currentSelectedItem: StoryItemModel;
   currentIndex: number;
-  cercetatorData: CercetatorSectionModel = {
-    title: 'Profesor', subtitle: 'Subtitle', items: [
-      { title: 'title', mainDescription: 'main desc', icon: 'fa-laptop' },
-      { title: 'title', mainDescription: 'main desc', icon: 'something' },
-      { title: 'title', mainDescription: 'main desc', icon: 'something' },
-      { title: 'title', mainDescription: 'main desc', icon: 'something' }
-    ]
-  };
+  cercetatorData: CercetatorSectionModel;
   cercetatorForm = new FormGroup({
     mainTitle: new FormControl('', Validators.required),
     subTitle: new FormControl('', Validators.required),
@@ -34,19 +27,22 @@ export class CercetatorComponent implements OnInit {
   });
 
   cercetatorItemsFormEdit = new FormGroup({
+    id: new FormControl(''),
+    rowVersion: new FormControl(''),
     title: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
-    icon: new FormControl('', Validators.required)
+    icon: new FormControl('', Validators.required),
+    cercetatorId: new FormControl('')
   });
   closeResult: string;
   constructor(private modalService: NgbModal, private cercetatorService: CercetatorService) {
-
+    this.getData();
   }
-  ngOnInit(): void {
-
-  }
-
   open(content: any, item?: any, index?: number) {
+    if (this.cercetatorData) {
+      this.cercetatorForm.setValue({ mainTitle: this.cercetatorData.title, subTitle: this.cercetatorData.subtitle });
+    }
+
     if (item) {
       this.currentSelectedItem = item;
       this.cercetatorItemsFormEdit.setValue(this.currentSelectedItem);
@@ -74,22 +70,93 @@ export class CercetatorComponent implements OnInit {
   }
 
   save(data: any) {
+    console.log('x');
+    if (this.cercetatorData.id) {
+      this.cercetatorService.saveEdit({
+        Id: this.cercetatorData.id, Title: data.mainTitle, Subtitle: data.subTitle,
+        RowVersion: this.cercetatorData.rowVersion
+      },
+        this.cercetatorData.id).subscribe(res => {
+          this.cercetatorData = res[0][0];
+          if (res[0].length === 0) {
+            this.cercetatorData = new CercetatorSectionModel();
+            this.cercetatorData.title = '';
+            this.cercetatorData.subtitle = '';
+            this.cercetatorData.items = [];
+          }
+          else {
+            this.cercetatorData = res[0][0];
+          }
+          this.cercetatorData.items = res[1];
+        });
+    }
+    else {
+      const dataToSend = { Title: data.mainTitle, Subtitle: data.subTitle };
+      this.cercetatorService.save(dataToSend).subscribe(res => {
+        console.log(res);
+        this.cercetatorData = res[0][0];
+        if (res[0].length === 0) {
+          this.cercetatorData = new CercetatorSectionModel();
+          this.cercetatorData.title = '';
+          this.cercetatorData.subtitle = '';
+          this.cercetatorData.items = [];
+        }
+        else {
+          this.cercetatorData = res[0][0];
+        }
+        this.cercetatorData.items = res[1];
+      });
+    }
+  }
+
+  saveItem(data: any) {
     console.log(data);
-    this.cercetatorData.title = data.mainTitle;
-    this.cercetatorData.subtitle = data.subTitle;
+    console.log(this.cercetatorData);
+    data.cercetatorId = this.cercetatorData.id;
+    this.cercetatorService.saveItem(data).subscribe(res => {
+      console.log(res);
+      if (!this.cercetatorData.items) {
+        this.cercetatorData.items = [];
+      }
+      this.cercetatorData.items.push(res);
+      this.cercetatorItemsFormEdit.reset();
+    });
   }
 
-  saveStoryPoint(data: ServiceItem) {
-    console.log(data);
-    this.cercetatorData.items.push(data);
+  saveItemEdit(data: StoryItemModel) {
+    this.cercetatorService.saveItemEdit(data).subscribe(res => {
+      console.log(res);
+      this.cercetatorData = res[0][0];
+      this.cercetatorData.items = res[1];
+      this.cercetatorItemsFormEdit.setValue(this.cercetatorData.items[this.currentIndex]);
+    });
   }
 
-  saveStoryPointItemEdit(data: ServiceItem ) {
-    this.cercetatorData.items[this.currentIndex] = data;
+  removeItem(index: number) {
+    this.cercetatorService.removeItem(this.cercetatorData.items[index].id).subscribe(res => {
+      this.cercetatorData.items.splice(index, 1);
+      console.log(res);
+    });
   }
 
-  remove(index: number) {
-    this.cercetatorData.items.splice(index, 1);
+  getData() {
+    this.cercetatorService.getData().subscribe(res => {
+      console.log(res);
+      this.cercetatorData = res[0][0];
+      if (res[0].length === 0) {
+        this.cercetatorData = new CercetatorSectionModel();
+        this.cercetatorData.title = '';
+        this.cercetatorData.subtitle = '';
+        this.cercetatorData.items = [];
+      }
+      else {
+        this.cercetatorData = res[0][0];
+      }
+      this.cercetatorData.items = res[1];
+    });
   }
+
+
+  ngOnInit() { }
 
 }

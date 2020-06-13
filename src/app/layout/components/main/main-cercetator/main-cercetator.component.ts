@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CercetatorSectionModel } from 'src/app/shared/models/cercetator-section.model';
+import { CercetatorService } from 'src/app/shared/services/cercetator.service';
 
 @Component({
   selector: 'app-main-cercetator',
@@ -8,7 +10,10 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MainCercetatorComponent implements OnInit {
   closeResult: string;
-  constructor(private modalService: NgbModal) { }
+  cercetatorData: CercetatorSectionModel;
+  constructor(private modalService: NgbModal, private cercetatorService: CercetatorService) {
+    this.getData();
+  }
   open(content) {
     this.modalService.open(content).result.then(
       (result) => {
@@ -28,6 +33,23 @@ export class MainCercetatorComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  getData() {
+    this.cercetatorService.getData().subscribe(res => {
+      console.log(res);
+      this.cercetatorData = res[0][0];
+      if (res[0].length === 0) {
+        this.cercetatorData = new CercetatorSectionModel();
+        this.cercetatorData.title = '';
+        this.cercetatorData.subtitle = '';
+        this.cercetatorData.items = [];
+      }
+      else {
+        this.cercetatorData = res[0][0];
+      }
+      this.cercetatorData.items = res[1];
+    });
   }
   ngOnInit(): void {
   }

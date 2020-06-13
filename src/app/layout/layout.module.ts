@@ -14,10 +14,20 @@ import { ServicesComponent } from './components/services/services.component';
 import { TeamComponent } from './components/team/team.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MainDashboardComponent } from './components/main/main-dashboard/main-dashboard.component';
+import { MainCercetatorComponent } from './components/main/main-cercetator/main-cercetator.component';
+import { MainArchitectComponent } from './components/main/main-architect/main-architect.component';
+import { MainOmComponent } from './components/main/main-om/main-om.component';
+import { MainCribaComponent } from './components/main/main-criba/main-criba.component';
+import { MainContactComponent } from './components/main/main-contact/main-contact.component';
+import { MainNavbarComponent } from './components/main/main-navbar/main-navbar.component';
+import { MainHeaderComponent } from './components/main/main-header/main-header.component';
+import { MainFooterComponent } from './components/main/main-footer/main-footer.component';
+import { MainProfessorComponent } from './components/main/main-professor/main-professor.component';
 
 @NgModule({
   declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent,
-    FooterComponent, AboutComponent, ClientsComponent, ContactComponent, PortfolioComponent, ServicesComponent, TeamComponent],
+    FooterComponent, AboutComponent, ClientsComponent, ContactComponent, PortfolioComponent, ServicesComponent, TeamComponent, MainDashboardComponent, MainCercetatorComponent, MainArchitectComponent, MainOmComponent, MainCribaComponent, MainContactComponent, MainNavbarComponent, MainHeaderComponent, MainFooterComponent, MainProfessorComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,

@@ -4,4 +4,5 @@ export class PortfolioItemModel {
     subtitle: string;
     description: string;
     date: Date;
+    id: number;
 }

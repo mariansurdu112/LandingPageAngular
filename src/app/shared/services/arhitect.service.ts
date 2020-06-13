@@ -17,28 +17,34 @@ const httpOptions = {
 export class ArhitectService {
   private appHost: string;
   private resource = 'api/ArchitectAsync';
-  private resourcePortfolioItem = 'api/ArchitectAsync/AddPortfolioItem/';
+  private resourcePortfolioItem = 'api/ArchitectAsync/PortfolioItem/';
   constructor(private http: HttpClient) {
     this.appHost = environment.host;
   }
+
 
   getData(): Observable<any> {
     return this.http.get(this.appHost + this.resource);
   }
 
-  savePortfolioItem(data: any): Observable<any> {
+  saveItem(data: any): Observable<any> {
     return this.http.post(this.appHost + this.resourcePortfolioItem, data, httpOptions);
   }
 
-  savePortfolioItemEdit(data: any): Observable<any> {
-    return this.http.post(this.appHost + this.resourcePortfolioItem, data, httpOptions);
+  saveItemEdit(data: any): Observable<any> {
+    console.log(data);
+    return this.http.put(this.appHost + this.resourcePortfolioItem + data.id, data, httpOptions);
   }
 
-  removePortfolioItem(id: number): Observable<any> {
+  removeItem(id: number): Observable<any> {
     return this.http.delete(this.appHost + this.resourcePortfolioItem + id, httpOptions);
   }
 
+  save(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resource, data, httpOptions);
+  }
+
   saveEdit(data: any, id: number): Observable<any> {
-    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
+    return this.http.put(this.appHost + this.resource + '/' + id, data, httpOptions);
   }
 }

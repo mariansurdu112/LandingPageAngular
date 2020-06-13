@@ -1,6 +1,6 @@
 <button class="btn btn-info" (click)="open(contentEdit)">Edit</button>
 <button class="btn btn-success" (click)="open(contentPortfolio)">Add new data</button>
-<section class="bg-light page-section" id="portfolio">
+<section class="bg-light page-section" id="portfolio" *ngIf="arhitectData">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">

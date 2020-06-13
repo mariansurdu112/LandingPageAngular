@@ -12,7 +12,7 @@
             <li *ngFor="let storyItem of profesorData.storyItems; let i = index"
               [ngClass]="{'timeline-inverted':i%2!==0}">
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" [src]="storyItem.photoUrl" alt="">
+                <img class="rounded-circle img-fluid" [src]="storyItem.photoUrl" alt="" (click)="open(content,i)">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -37,3 +37,38 @@
       </div>
     </div>
   </section>
+
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mx-auto">
+            <div class="modal-body">
+              <ul class="timeline">
+                <li [ngClass]="{'timeline-inverted':i%2!==0}">
+                  <div class="timeline-image">
+                    <img class="rounded-circle img-fluid" [src]="currentStoryItem.photoUrl" alt="">
+                  </div>
+
+                </li>
+              </ul>
+              <ul class="list-inline">
+                <li>Start year: {{currentStoryItem.startYear}}</li>
+                <li>End year: {{currentStoryItem.endYear}}</li>
+                <li>{{currentStoryItem.mainDescription}}</li>
+              </ul>
+              <p>{{currentStoryItem.fullDetails}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+    </div>
+
+
+
+  </ng-template>

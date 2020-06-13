@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ArhitectSectionModel } from 'src/app/shared/models/arhitect.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ArhitectService } from 'src/app/shared/services/arhitect.service';
+import { PortfolioItemModel } from 'src/app/shared/models/portfolio-item.model';
 
 @Component({
   selector: 'app-main-architect',
@@ -10,8 +11,32 @@ import { ArhitectService } from 'src/app/shared/services/arhitect.service';
 })
 export class MainArchitectComponent implements OnInit {
   arhitectData: ArhitectSectionModel;
+  currentItem: PortfolioItemModel;
+  closeResult: string;
   constructor(private modalService: NgbModal, private architectService: ArhitectService) {
     this.getData();
+  }
+
+  open(content: any, index: any) {
+    this.currentItem = this.arhitectData.items[index];
+    this.modalService.open(content).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   getData() {

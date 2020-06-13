@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfesorSectionModel } from 'src/app/shared/models/professor-section.model';
 import { ProfesorService } from 'src/app/shared/services/professor.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 
 @Component({
   selector: 'app-main-professor',
@@ -9,8 +11,32 @@ import { ProfesorService } from 'src/app/shared/services/professor.service';
 })
 export class MainProfessorComponent implements OnInit {
   profesorData: ProfesorSectionModel;
-  constructor(private professorService: ProfesorService) {
+  currentStoryItem: StoryItemModel;
+  closeResult: string;
+  constructor(private modalService: NgbModal, private professorService: ProfesorService) {
     this.getData();
+  }
+
+  open(content: any, index: number) {
+    this.currentStoryItem = this.profesorData.storyItems[index];
+    this.modalService.open(content).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
   getData() {
     this.professorService.getData().subscribe(res => {

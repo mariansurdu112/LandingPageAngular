@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CercetatorSectionModel } from 'src/app/shared/models/cercetator-section.model';
 import { CercetatorService } from 'src/app/shared/services/cercetator.service';
+import { ServiceItem } from 'src/app/shared/models/service-item.model';
 
 @Component({
   selector: 'app-main-cercetator',
@@ -10,11 +11,14 @@ import { CercetatorService } from 'src/app/shared/services/cercetator.service';
 })
 export class MainCercetatorComponent implements OnInit {
   closeResult: string;
+  currentItem: ServiceItem;
   cercetatorData: CercetatorSectionModel;
   constructor(private modalService: NgbModal, private cercetatorService: CercetatorService) {
     this.getData();
   }
-  open(content) {
+  open(content: any, index: number) {
+    this.currentItem = this.cercetatorData.items[index];
+    console.log(this.currentItem);
     this.modalService.open(content).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;

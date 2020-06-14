@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 import { ProfesorService } from 'src/app/shared/services/professor.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -160,6 +161,10 @@ export class ProfesorComponent implements OnInit {
       }
       this.profesorData.storyItems = res[1];
     });
+  }
+
+  getPhotoUrl(id: number) {
+    return environment.photoUrl + id;
   }
 
 

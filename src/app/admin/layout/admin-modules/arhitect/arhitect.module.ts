@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ArhitectEditComponent } from './components/arhitect-edit/arhitect-edit.component';
 import { ArhitectEditItemComponent } from './components/arhitect-edit-item/arhitect-edit-item.component';
 import { ArhitectAddItemComponent } from './components/arhitect-add-item/arhitect-add-item.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ArhitectAddItemComponent } from './components/arhitect-add-item/arhitec
   imports: [
     CommonModule,
     ArhitectRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ArhitectModule { }

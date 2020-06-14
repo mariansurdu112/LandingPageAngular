@@ -14,7 +14,7 @@
             <li *ngFor="let storyItem of profesorData.storyItems; let i = index"
               [ngClass]="{'timeline-inverted':i%2!==0}">
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" [src]="storyItem.photoUrl" alt="">
+                <img class="rounded-circle img-fluid" [src]="getPhotoUrl(storyItem.photoId)" alt="">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -91,10 +91,6 @@
             formControlName="mainDescription">
         </div>
         <div class="form-group">
-          <label for="photoUrl">Photo Url:</label>
-          <input type="text" class="form-control" placeholder="Photo Url" id="photoUrl" formControlName="photoUrl">
-        </div>
-        <div class="form-group">
           <label for="fullDetails">Full Details:</label>
           <textarea class="form-control" id="fullDetails" rows="3" placeholder="Full Details" id="fullDetails"
             formControlName="fullDetails"></textarea>
@@ -132,10 +128,6 @@
           <label for="title">Main Description:</label>
           <input type="text" class="form-control" placeholder="Main Description" id="mainDescription"
             formControlName="mainDescription">
-        </div>
-        <div class="form-group">
-          <label for="photoUrl">Photo Url:</label>
-          <input type="text" class="form-control" placeholder="Photo Url" id="photoUrl" formControlName="photoUrl">
         </div>
         <div class="form-group">
           <label for="fullDetails">Full Details:</label>

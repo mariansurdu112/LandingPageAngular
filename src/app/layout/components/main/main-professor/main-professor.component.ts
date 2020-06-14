@@ -3,6 +3,7 @@ import { ProfesorSectionModel } from 'src/app/shared/models/professor-section.mo
 import { ProfesorService } from 'src/app/shared/services/professor.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main-professor',
@@ -27,6 +28,10 @@ export class MainProfessorComponent implements OnInit {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       }
     );
+  }
+
+  getPhotoUrl(id: number) {
+    return environment.photoUrl + id;
   }
 
   private getDismissReason(reason: any): string {

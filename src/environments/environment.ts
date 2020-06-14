@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:44341/'
+  host: 'http://localhost:44341/',
+  photoUrl: 'http://localhost:44341/api/PhotoAsync/'
 };
 
 /*

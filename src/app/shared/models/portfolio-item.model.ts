@@ -1,5 +1,5 @@
 export class PortfolioItemModel {
-    photo: string;
+    photoId: number;
     title: string;
     subtitle: string;
     description: string;

@@ -4,7 +4,7 @@ export class StoryItemModel {
     endYear: number;
     title: string;
     mainDescription: string;
-    photoUrl: string;
+    photoId: number;
     fullDetails: string;
     // many things to be defined
 }

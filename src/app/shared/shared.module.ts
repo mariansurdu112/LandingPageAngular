@@ -1,11 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Modal1Component } from './components/modal1/modal1.component';
-import { Modal2Component } from './components/modal2/modal2.component';
-import { Modal3Component } from './components/modal3/modal3.component';
-import { Modal4Component } from './components/modal4/modal4.component';
-import { Modal5Component } from './components/modal5/modal5.component';
-import { Modal6Component } from './components/modal6/modal6.component';
 import { LanguageTranslationModule } from './modules/language-translation/language-translation.module';
 import { PageHeaderModule } from './modules/page-header/page-header.module';
 import { StatModule } from './modules/stat/stat.module';
@@ -17,11 +11,13 @@ import { CribaService } from './services/criba.service';
 import { DashboardService } from './services/dashboard.service';
 import { OmService } from './services/om.service';
 import { ProfesorService } from './services/professor.service';
+import { PhotoUploadComponent } from './components/photo-upload/photo-upload.component';
+import { PhotoService } from './services/photo.service';
 
 
 
 @NgModule({
-  declarations: [Modal1Component, Modal2Component, Modal3Component, Modal4Component, Modal5Component, Modal6Component],
+  declarations: [PhotoUploadComponent],
   imports: [
     CommonModule,
     LanguageTranslationModule,
@@ -29,7 +25,8 @@ import { ProfesorService } from './services/professor.service';
     StatModule,
     SharedPipesModule
   ],
-  providers: [ArhitectService, CercetatorService, ContactService, CribaService, DashboardService, OmService, ProfesorService],
-  exports: [Modal1Component, Modal2Component, Modal3Component, Modal4Component, Modal5Component, Modal6Component],
+  providers: [ArhitectService, CercetatorService, ContactService, CribaService,
+    DashboardService, OmService, ProfesorService, PhotoService],
+  exports: [PhotoUploadComponent],
 })
 export class SharedModule { }

@@ -46,9 +46,9 @@
           <div class="col-lg-12 mx-auto">
             <div class="modal-body">
               <ul class="timeline">
-                <li [ngClass]="{'timeline-inverted':i%2!==0}">
+                <li>
                   <div class="timeline-image">
-                    <img class="rounded-circle img-fluid" [src]="currentStoryItem.photoUrl" alt="">
+                    <img class="rounded-circle img-fluid" [src]="getPhotoUrl(currentStoryItem.photoId)" alt="">
                   </div>
 
                 </li>

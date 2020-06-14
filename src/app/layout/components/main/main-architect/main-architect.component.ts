@@ -3,6 +3,7 @@ import { ArhitectSectionModel } from 'src/app/shared/models/arhitect.model';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ArhitectService } from 'src/app/shared/services/arhitect.service';
 import { PortfolioItemModel } from 'src/app/shared/models/portfolio-item.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main-architect',
@@ -37,6 +38,10 @@ export class MainArchitectComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  getPhotoUrl(id: number) {
+    return environment.photoUrl + id;
   }
 
   getData() {

@@ -3,7 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ArhitectSectionModel } from 'src/app/shared/models/arhitect.model';
 import { PortfolioItemModel } from 'src/app/shared/models/portfolio-item.model';
-import {ArhitectService} from 'src/app/shared/services/arhitect.service';
+import { ArhitectService } from 'src/app/shared/services/arhitect.service';
+import { PhotoService } from 'src/app/shared/services/photo.service';
+import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-arhitect',
   templateUrl: './arhitect.component.html',
@@ -12,6 +15,11 @@ import {ArhitectService} from 'src/app/shared/services/arhitect.service';
 export class ArhitectComponent implements OnInit {
   currentSelectedItem: PortfolioItemModel;
   currentIndex: number;
+  selectedPhotoId: number;
+  currentOperation: number;
+  dataOperation: any;
+  eventsSubject: Subject<any> = new Subject<any>();
+
   arhitectData: ArhitectSectionModel;
   arhitectForm = new FormGroup({
     mainTitle: new FormControl('', Validators.required),
@@ -20,7 +28,7 @@ export class ArhitectComponent implements OnInit {
   arhitectItemsForm = new FormGroup({
     title: new FormControl('', Validators.required),
     subtitle: new FormControl('', Validators.required),
-    photo: new FormControl('', Validators.required),
+    photoId: new FormControl(''),
     description: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
     architectId: new FormControl('')
@@ -28,7 +36,7 @@ export class ArhitectComponent implements OnInit {
   arhitectItemsFormEdit = new FormGroup({
     title: new FormControl('', Validators.required),
     subtitle: new FormControl('', Validators.required),
-    photo: new FormControl('', Validators.required),
+    photoId: new FormControl(''),
     description: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
     architectId: new FormControl(''),
@@ -37,7 +45,7 @@ export class ArhitectComponent implements OnInit {
 
   });
   closeResult: string;
-  constructor(private modalService: NgbModal, private architectService: ArhitectService) {
+  constructor(private modalService: NgbModal, private architectService: ArhitectService, private photoService: PhotoService) {
     this.getData();
   }
   open(content: any, item?: any, index?: number) {
@@ -61,6 +69,10 @@ export class ArhitectComponent implements OnInit {
     );
   }
 
+  getPhotoUrl(id: number) {
+    return environment.photoUrl + id;
+  }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -71,9 +83,33 @@ export class ArhitectComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  public uploadFinished = (event: any) => {
+    console.log('Upload photo finished');
+    this.selectedPhotoId = event.photoId;
+    if (this.currentOperation === 1) {
+      this.dataOperation.architectId = this.arhitectData.id;
+      this.dataOperation.photoId = this.selectedPhotoId;
+      console.log(this.dataOperation);
+      this.architectService.saveItem(this.dataOperation).subscribe(res => {
+        console.log(res);
+        if (!this.arhitectData.items) {
+          this.arhitectData.items = [];
+        }
+        this.arhitectData.items.push(res);
+        this.arhitectItemsForm.reset();
+      });
+    }
+    else {
+      this.dataOperation.photoId = this.selectedPhotoId;
+      this.architectService.saveItemEdit(this.dataOperation).subscribe(res => {
+        this.arhitectData = res[0][0];
+        this.arhitectData.items = res[1];
+        this.arhitectItemsFormEdit.setValue(this.arhitectData.items[this.currentIndex]);
+      });
+    }
+ }
 
   save(data: any) {
-    console.log('x');
     if (this.arhitectData.id) {
       this.architectService.saveEdit({
         Id: this.arhitectData.id, Title: data.mainTitle, Subtitle: data.subTitle,
@@ -113,26 +149,17 @@ export class ArhitectComponent implements OnInit {
   }
 
   saveArhitectItem(data: any) {
-    console.log(data);
-    console.log(this.arhitectData);
-    data.architectId = this.arhitectData.id;
-    this.architectService.saveItem(data).subscribe(res => {
-      console.log(res);
-      if (!this.arhitectData.items) {
-        this.arhitectData.items = [];
-      }
-      this.arhitectData.items.push(res);
-      this.arhitectItemsForm.reset();
-    });
+    this.currentOperation = 1;
+    this.dataOperation = data;
+    this.eventsSubject.next();
+
   }
 
   saveArhitectItemEdit(data: PortfolioItemModel) {
-    this.architectService.saveItemEdit(data).subscribe(res => {
-      console.log(res);
-      this.arhitectData = res[0][0];
-      this.arhitectData.items = res[1];
-      this.arhitectItemsFormEdit.setValue(this.arhitectData.items[this.currentIndex]);
-    });
+    this.currentOperation = 2;
+    this.dataOperation = data;
+    this.eventsSubject.next();
+
   }
 
   remove(index: number) {

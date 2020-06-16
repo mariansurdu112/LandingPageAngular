@@ -84,11 +84,15 @@ export class ArhitectComponent implements OnInit {
     }
   }
   public uploadFinished = (event: any) => {
-    console.log('Upload photo finished');
-    this.selectedPhotoId = event.photoId;
+    if (event !== 0) {
+      this.selectedPhotoId = event.photoId;
+      this.dataOperation.photoId = this.selectedPhotoId;
+    }
+    else {
+      this.dataOperation.photoId = this.arhitectData.items[this.currentIndex].photoId;
+    }
     if (this.currentOperation === 1) {
       this.dataOperation.architectId = this.arhitectData.id;
-      this.dataOperation.photoId = this.selectedPhotoId;
       console.log(this.dataOperation);
       this.architectService.saveItem(this.dataOperation).subscribe(res => {
         console.log(res);
@@ -100,7 +104,6 @@ export class ArhitectComponent implements OnInit {
       });
     }
     else {
-      this.dataOperation.photoId = this.selectedPhotoId;
       this.architectService.saveItemEdit(this.dataOperation).subscribe(res => {
         this.arhitectData = res[0][0];
         this.arhitectData.items = res[1];

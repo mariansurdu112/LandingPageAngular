@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProfesorEditComponent } from './components/profesor-edit/profesor-edit.component';
 import { ProfesorItemAddComponent } from './components/profesor-item-add/profesor-item-add.component';
 import { ProfesorItemEditComponent } from './components/profesor-item-edit/profesor-item-edit.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ProfesorItemEditComponent } from './components/profesor-item-edit/profe
   imports: [
     CommonModule,
     ProfesorRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ProfesorModule { }

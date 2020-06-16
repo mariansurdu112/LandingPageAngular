@@ -72,6 +72,10 @@ export class PhotoUploadComponent implements OnInit, OnDestroy {
   }
 
   public uploadFile = (files) => {
+    if (!files) {
+      this.onUploadFinished.emit(0);
+      return;
+    }
     if (files.length === 0) {
       return;
     }

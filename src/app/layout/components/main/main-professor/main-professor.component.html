@@ -12,7 +12,8 @@
             <li *ngFor="let storyItem of profesorData.storyItems; let i = index"
               [ngClass]="{'timeline-inverted':i%2!==0}">
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" [src]="storyItem.photoUrl" alt="" (click)="open(content,i)">
+                <img class="rounded-circle img-fluid" [src]="getPhotoUrl(storyItem.photoId)" alt=""
+                  (click)="open(content,i)">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">

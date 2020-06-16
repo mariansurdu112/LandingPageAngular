@@ -31,6 +31,7 @@ export class MainProfessorComponent implements OnInit {
   }
 
   getPhotoUrl(id: number) {
+    console.log(id);
     return environment.photoUrl + id;
   }
 

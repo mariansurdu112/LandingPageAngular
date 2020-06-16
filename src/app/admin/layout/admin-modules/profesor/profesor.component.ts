@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 import { ProfesorService } from 'src/app/shared/services/professor.service';
 import { environment } from 'src/environments/environment';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -15,6 +16,10 @@ import { environment } from 'src/environments/environment';
 export class ProfesorComponent implements OnInit {
   currentSelectedItem: StoryItemModel;
   currentIndex: number;
+  selectedPhotoId: number;
+  currentOperation: number;
+  dataOperation: any;
+  eventsSubject: Subject<any> = new Subject<any>();
   profesorData: ProfesorSectionModel;
   proffesorForm = new FormGroup({
     mainTitle: new FormControl('', Validators.required),
@@ -26,7 +31,7 @@ export class ProfesorComponent implements OnInit {
     fullDetails: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
-    photoUrl: new FormControl('', Validators.required),
+    photoId: new FormControl(''),
     professorId: new FormControl(''),
   });
 
@@ -37,7 +42,7 @@ export class ProfesorComponent implements OnInit {
     fullDetails: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
-    photoUrl: new FormControl('', Validators.required),
+    photoId: new FormControl(''),
     professorId: new FormControl(''),
     rowVersion: new FormControl('')
   });
@@ -76,8 +81,32 @@ export class ProfesorComponent implements OnInit {
     }
   }
 
+  public uploadFinished = (event: any) => {
+    console.log('Upload photo finished');
+    this.selectedPhotoId = event.photoId;
+    this.dataOperation.photoId = this.selectedPhotoId;
+    if (this.currentOperation === 1) {
+      this.dataOperation.professorId = this.profesorData.id;
+      this.professorService.saveStoryPointItem(this.dataOperation).subscribe(res => {
+        console.log(res);
+        if (!this.profesorData.storyItems) {
+          this.profesorData.storyItems = [];
+        }
+        this.profesorData.storyItems.push(res);
+        this.storyPointForm.reset();
+      });
+    }
+    else {
+      this.professorService.saveStoryPointItemEdit(this.dataOperation).subscribe(res => {
+        console.log(res);
+        this.profesorData = res[0][0];
+        this.profesorData.storyItems = res[1];
+        this.storyPointFormEdit.setValue(this.profesorData.storyItems[this.currentIndex]);
+      });
+    }
+  }
+
   save(data: any) {
-    console.log('x');
     if (this.profesorData.id) {
       this.professorService.saveEdit({
         Id: this.profesorData.id, Title: data.mainTitle, Subtitle: data.subTitle,
@@ -117,26 +146,15 @@ export class ProfesorComponent implements OnInit {
   }
 
   saveStoryPoint(data: any) {
-    console.log(data);
-    console.log(this.profesorData);
-    data.professorId = this.profesorData.id;
-    this.professorService.saveStoryPointItem(data).subscribe(res => {
-      console.log(res);
-      if (!this.profesorData.storyItems) {
-        this.profesorData.storyItems = [];
-      }
-      this.profesorData.storyItems.push(res);
-      this.storyPointForm.reset();
-    });
-  }
+    this.currentOperation = 1;
+    this.dataOperation = data;
+    this.eventsSubject.next();
+}
 
   saveStoryPointItemEdit(data: StoryItemModel) {
-    this.professorService.saveStoryPointItemEdit(data).subscribe(res => {
-      console.log(res);
-      this.profesorData = res[0][0];
-      this.profesorData.storyItems = res[1];
-      this.storyPointFormEdit.setValue(this.profesorData.storyItems[this.currentIndex]);
-    });
+    this.currentOperation = 2;
+    this.dataOperation = data;
+    this.eventsSubject.next();
   }
 
   removeStoryPointItem(index: number) {

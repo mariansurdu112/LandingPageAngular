@@ -17,15 +17,34 @@ const httpOptions = {
 export class OmService {
   private appHost: string;
   private resource = 'api/OmAsync';
+  private resourceItem = 'api/OmAsync/Item/';
   constructor(private http: HttpClient) {
     this.appHost = environment.host;
   }
 
-  getData(data: any): Observable<any> {
-    return this.http.get(this.appHost + this.resource, data);
+
+  getData(): Observable<any> {
+    return this.http.get(this.appHost + this.resource);
+  }
+
+  saveItem(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resourceItem, data, httpOptions);
+  }
+
+  saveItemEdit(data: any): Observable<any> {
+    console.log(data);
+    return this.http.put(this.appHost + this.resourceItem + data.id, data, httpOptions);
+  }
+
+  removeItem(id: number): Observable<any> {
+    return this.http.delete(this.appHost + this.resourceItem + id, httpOptions);
+  }
+
+  save(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resource, data, httpOptions);
   }
 
   saveEdit(data: any, id: number): Observable<any> {
-    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
+    return this.http.put(this.appHost + this.resource + '/' + id, data, httpOptions);
   }
 }

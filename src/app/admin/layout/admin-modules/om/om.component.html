@@ -1,1 +1,112 @@
-<!-- <button class="btn btn-info" (click)="editSection()">Edit</button> -->
+ <button class="btn btn-info" (click)="open(content)">Edit</button>
+ <button class="btn btn-success" (click)="open(contentom)">Add new data</button>
+ <section class="page-section" *ngIf="omData">
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-12 text-center">
+         <h2 class="section-heading text-uppercase">{{omData.title}}</h2>
+         <h3 class="section-subheading text-muted">{{omData.subtitle}}</h3>
+       </div>
+     </div>
+     <div class="row text-center">
+       <div class="col-md-4" *ngFor="let item of omData.items;let i = index">
+         <span class="fa-stack fa-4x">
+           <i class="fas fa-circle fa-stack-2x text-primary"></i>
+           <i class="fas {{item.icon}} fa-stack-1x fa-inverse"></i>
+         </span>
+         <h4 class="service-heading">{{item.title}}</h4>
+         <p class="text-muted">{{item.mainDescription}}</p>
+         <div style="text-align: center;">
+           <button class="btn btn-success btn-sm" (click)="open(contentomEdit,item,i)">Edit</button>
+           <button class="btn btn-danger btn-sm" (click)="removeItem(i)">Remove</button>
+         </div>
+       </div>
+
+
+     </div>
+   </div>
+ </section>
+
+ <ng-template #content let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <p>Edit</p>
+   </div>
+   <div class="modal-body">
+     <form [formGroup]="omForm" (ngSubmit)="save(omForm.value)">
+       <div class="form-group">
+         <label for="title">Main title:</label>
+         <input type="text" class="form-control" placeholder="Title" id="title" formControlName="mainTitle">
+       </div>
+       <div class="form-group">
+         <label for="subtitle">Subtitle:</label>
+         <input type="text" class="form-control" placeholder="Subtitle" id="subtitle" formControlName="subTitle">
+       </div>
+       <button type="submit" class="btn btn-primary" [disabled]="!omForm.valid">Save</button>
+     </form>
+   </div>
+
+   <div class="modal-footer">
+     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+   </div>
+ </ng-template>
+
+ <ng-template #contentom let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <p>Add item</p>
+   </div>
+   <div class="modal-body">
+     <form [formGroup]="omItemsForm" (ngSubmit)="saveItem(omItemsForm.value)">
+       <div class="form-group">
+         <label for="title">Title:</label>
+         <input type="text" class="form-control" placeholder="Title" id="title" formControlName="title">
+       </div>
+       <div class="form-group">
+         <label for="mainDescription">Main Description:</label>
+         <textarea class="form-control" id="mainDescription" rows="3" placeholder="Main Description"
+           id="mainDescription" formControlName="mainDescription"></textarea>
+       </div>
+       <div class="form-group">
+         <label for="icon">Icon:</label>
+         <input type="text" class="form-control" placeholder="Icon" id="icon" formControlName="icon">
+         <a href="https://fontawesome.bootstrapcheatsheets.com/">Find icons here</a>
+       </div>
+
+       <button type="submit" class="btn btn-primary" [disabled]="!omItemsForm.valid">Save</button>
+     </form>
+   </div>
+
+   <div class="modal-footer">
+     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+   </div>
+ </ng-template>
+
+
+ <ng-template #contentomEdit let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <p>Edit item</p>
+   </div>
+   <div class="modal-body">
+     <form [formGroup]="omItemsFormEdit" (ngSubmit)="saveItemEdit(omItemsFormEdit.value)">
+       <div class="form-group">
+         <label for="title">Title:</label>
+         <input type="text" class="form-control" placeholder="Title" id="title" formControlName="title">
+       </div>
+       <div class="form-group">
+         <label for="mainDescription">Main Description:</label>
+         <textarea class="form-control" id="mainDescription" rows="3" placeholder="Main Description"
+           id="mainDescription" formControlName="mainDescription"></textarea>
+       </div>
+       <div class="form-group">
+         <label for="icon">Icon:</label>
+         <input type="text" class="form-control" placeholder="Icon" id="icon" formControlName="icon">
+         <a href="https://fontawesome.bootstrapcheatsheets.com/">Find icons here</a>
+       </div>
+
+       <button type="submit" class="btn btn-primary" [disabled]="!omItemsFormEdit.valid">Save</button>
+     </form>
+   </div>
+
+   <div class="modal-footer">
+     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+   </div>
+ </ng-template>

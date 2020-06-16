@@ -1,13 +1,49 @@
-<section class="page-section" id="om">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2 class="section-heading text-uppercase">Om</h2>
-        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-      </div>
-    </div>
-    <div class="row">
+ <section class="page-section" *ngIf="omData" id="om">
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-12 text-center">
+         <h2 class="section-heading text-uppercase">{{omData.title}}</h2>
+         <h3 class="section-subheading text-muted">{{omData.subtitle}}</h3>
+       </div>
+     </div>
+     <div class="row text-center">
+       <div class="col-md-4" *ngFor="let item of omData.items;let i = index">
+         <span class="fa-stack fa-4x" (click)="open(content,i)">
+           <i class="fas fa-circle fa-stack-2x text-primary"></i>
+           <i class="fas {{item.icon}} fa-stack-1x fa-inverse"></i>
+         </span>
+         <h4 class="service-heading">{{item.title}}</h4>
+         <p class="text-muted">{{item.mainDescription}}</p>
+       </div>
 
-    </div>
-  </div>
-</section>
+
+     </div>
+   </div>
+ </section>
+ <ng-template #content let-c="close" let-d="dismiss">
+   <div class="modal-body">
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-12 mx-auto">
+           <div class="modal-body">
+             <div class="row text-center">
+               <div class="col-md-4">
+                 <span class="fa-stack fa-4x">
+                   <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                   <i class="fas {{currentItem.icon}} fa-stack-1x fa-inverse"></i>
+                 </span>
+                 <h4 class="service-heading">{{currentItem.title}}</h4>
+                 <p class="text-muted">{{currentItem.mainDescription}}</p>
+               </div>
+
+
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div class="modal-footer">
+     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+   </div>
+ </ng-template>

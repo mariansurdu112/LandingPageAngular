@@ -25,7 +25,10 @@ export class ContactService {
     return this.http.get(this.appHost + this.resource);
   }
 
- saveEdit(data: any, id: number): Observable<any> {
-    return this.http.put(this.appHost + this.resource + id, data, httpOptions);
+  save(data: any): Observable<any> {
+    return this.http.post(this.appHost + this.resource, data, httpOptions);
+  }
+  saveEdit(data: any, id: number): Observable<any> {
+    return this.http.put(this.appHost + this.resource + '/' + id, data, httpOptions);
   }
 }

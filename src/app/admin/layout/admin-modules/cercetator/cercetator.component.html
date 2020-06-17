@@ -15,7 +15,7 @@
            <i class="fas {{item.icon}} fa-stack-1x fa-inverse"></i>
          </span>
          <h4 class="service-heading">{{item.title}}</h4>
-         <p class="text-muted">{{item.mainDescription}}</p>
+         <p class="text-muted" [innerHTML]="item.mainDescription"></p>
          <div style="text-align: center;">
            <button class="btn btn-success btn-sm" (click)="open(contentCercetatorEdit,item,i)">Edit</button>
            <button class="btn btn-danger btn-sm" (click)="removeItem(i)">Remove</button>
@@ -66,6 +66,10 @@
            id="mainDescription" formControlName="mainDescription"></textarea>
        </div>
        <div class="form-group">
+         <kendo-editor [value]="editorValueAdd" (valueChange)="valueChange($event,1)" style="height: 200px;">
+         </kendo-editor>
+       </div>
+       <div class="form-group">
          <label for="icon">Icon:</label>
          <input type="text" class="form-control" placeholder="Icon" id="icon" formControlName="icon">
          <a href="https://fontawesome.bootstrapcheatsheets.com/">Find icons here</a>
@@ -91,10 +95,14 @@
          <label for="title">Title:</label>
          <input type="text" class="form-control" placeholder="Title" id="title" formControlName="title">
        </div>
-       <div class="form-group">
+       <div class="form-group" >
          <label for="mainDescription">Main Description:</label>
          <textarea class="form-control" id="mainDescription" rows="3" placeholder="Main Description"
            id="mainDescription" formControlName="mainDescription"></textarea>
+       </div>
+       <div class="form-group">
+         <kendo-editor [value]="editorValueEdit" (valueChange)="valueChange($event,2)" style="height: 200px;">
+         </kendo-editor>
        </div>
        <div class="form-group">
          <label for="icon">Icon:</label>

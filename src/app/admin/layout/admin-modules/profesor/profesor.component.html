@@ -90,15 +90,18 @@
           <input type="text" class="form-control" placeholder="Main Description" id="mainDescription"
             formControlName="mainDescription">
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="true">
           <label for="fullDetails">Full Details:</label>
           <textarea class="form-control" id="fullDetails" rows="3" placeholder="Full Details" id="fullDetails"
             formControlName="fullDetails"></textarea>
-
         </div>
-         <app-photo-upload [editPhotoUrl]="" [events]="eventsSubject.asObservable()"
-           (onUploadFinished)="uploadFinished($event)">
-         </app-photo-upload>
+        <div class="form-group">
+          <kendo-editor [value]="editorValueAdd" (valueChange)="valueChange($event,1)" style="height: 200px;">
+          </kendo-editor>
+        </div>
+        <app-photo-upload [editPhotoUrl]="" [events]="eventsSubject.asObservable()"
+          (onUploadFinished)="uploadFinished($event)">
+        </app-photo-upload>
         <button type="submit" class="btn btn-primary" [disabled]="!storyPointForm.valid">Save</button>
       </form>
     </div>
@@ -132,14 +135,18 @@
           <input type="text" class="form-control" placeholder="Main Description" id="mainDescription"
             formControlName="mainDescription">
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="true">
           <label for="fullDetails">Full Details:</label>
           <textarea class="form-control" id="fullDetails" rows="3" placeholder="Full Details" id="fullDetails"
             formControlName="fullDetails"></textarea>
         </div>
-       <app-photo-upload *ngIf="currentSelectedItem" [editPhotoUrl]="getPhotoUrl(currentSelectedItem.photoId)"
-         [events]="eventsSubject.asObservable()" (onUploadFinished)="uploadFinished($event)">
-       </app-photo-upload>
+        <div class="form-group">
+          <kendo-editor [value]="editorValueEdit" (valueChange)="valueChange($event,2)" style="height: 200px;">
+          </kendo-editor>
+        </div>
+        <app-photo-upload *ngIf="currentSelectedItem" [editPhotoUrl]="getPhotoUrl(currentSelectedItem.photoId)"
+          [events]="eventsSubject.asObservable()" (onUploadFinished)="uploadFinished($event)">
+        </app-photo-upload>
         <button type="submit" class="btn btn-primary" [disabled]="!storyPointFormEdit.valid">Save</button>
       </form>
     </div>

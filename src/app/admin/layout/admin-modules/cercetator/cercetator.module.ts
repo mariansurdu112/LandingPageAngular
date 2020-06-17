@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CercetatorEditComponent } from './components/cercetator-edit/cercetator-edit.component';
 import { CercetatorItemAddComponent } from './components/cercetator-item-add/cercetator-item-add.component';
 import { CercetatorEditItemComponent } from './components/cercetator-edit-item/cercetator-edit-item.component';
+import { EditorModule } from '@progress/kendo-angular-editor';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CercetatorEditItemComponent } from './components/cercetator-edit-item/c
   imports: [
     CommonModule,
     CercetatorRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EditorModule
   ]
 })
 export class CercetatorModule { }

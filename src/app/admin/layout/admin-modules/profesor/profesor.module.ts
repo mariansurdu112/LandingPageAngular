@@ -8,6 +8,7 @@ import { ProfesorEditComponent } from './components/profesor-edit/profesor-edit.
 import { ProfesorItemAddComponent } from './components/profesor-item-add/profesor-item-add.component';
 import { ProfesorItemEditComponent } from './components/profesor-item-edit/profesor-item-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EditorModule } from '@progress/kendo-angular-editor';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     ProfesorRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    EditorModule
   ]
 })
 export class ProfesorModule { }

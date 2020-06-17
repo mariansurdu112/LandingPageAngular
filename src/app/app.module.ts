@@ -7,6 +7,8 @@ import { SharedModule } from './shared/shared.module';
 import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditorModule } from '@progress/kendo-angular-editor';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     SharedModule,
     LanguageTranslationModule,
-    HttpClientModule
+    HttpClientModule,
+    EditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

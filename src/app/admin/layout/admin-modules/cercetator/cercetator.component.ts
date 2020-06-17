@@ -23,6 +23,7 @@ export class CercetatorComponent implements OnInit {
   cercetatorItemsForm = new FormGroup({
     title: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
+    fullDetails: new FormControl('', Validators.required),
     icon: new FormControl('', Validators.required)
   });
 
@@ -31,12 +32,23 @@ export class CercetatorComponent implements OnInit {
     rowVersion: new FormControl(''),
     title: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
+    fullDetails: new FormControl('', Validators.required),
     icon: new FormControl('', Validators.required),
     cercetatorId: new FormControl('')
   });
   closeResult: string;
   constructor(private modalService: NgbModal, private cercetatorService: CercetatorService) {
     this.getData();
+  }
+  public editorValueAdd: string;
+  public editorValueEdit: string;
+
+  public valueChange(arg: any, operation: number): void {
+    if (operation === 1) {
+      this.cercetatorItemsForm.controls.fullDetails.setValue(`${arg || ''}`);
+    } else {
+      this.cercetatorItemsFormEdit.controls.fullDetails.setValue(`${arg || ''}`);
+    }
   }
   open(content: any, item?: any, index?: number) {
     if (this.cercetatorData) {
@@ -45,10 +57,11 @@ export class CercetatorComponent implements OnInit {
 
     if (item) {
       this.currentSelectedItem = item;
+      this.editorValueEdit = this.currentSelectedItem.fullDetails;
       this.cercetatorItemsFormEdit.setValue(this.currentSelectedItem);
       this.currentIndex = index;
     }
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },

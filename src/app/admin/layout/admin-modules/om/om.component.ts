@@ -21,6 +21,7 @@ export class OmComponent implements OnInit {
   omItemsForm = new FormGroup({
     title: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
+    fullDetails: new FormControl('', Validators.required),
     icon: new FormControl('', Validators.required)
   });
 
@@ -29,12 +30,23 @@ export class OmComponent implements OnInit {
     rowVersion: new FormControl(''),
     title: new FormControl('', Validators.required),
     mainDescription: new FormControl('', Validators.required),
+    fullDetails: new FormControl('', Validators.required),
     icon: new FormControl('', Validators.required),
     omId: new FormControl('')
   });
   closeResult: string;
   constructor(private modalService: NgbModal, private omService: OmService) {
     this.getData();
+  }
+  public editorValueAdd: string;
+  public editorValueEdit: string;
+
+  public valueChange(arg: any, operation: number): void {
+    if (operation === 1) {
+      this.omItemsForm.controls.fullDetails.setValue(`${arg || ''}`);
+    } else {
+      this.omItemsFormEdit.controls.fullDetails.setValue(`${arg || ''}`);
+    }
   }
   open(content: any, item?: any, index?: number) {
     if (this.omData) {
@@ -43,10 +55,11 @@ export class OmComponent implements OnInit {
 
     if (item) {
       this.currentSelectedItem = item;
+      this.editorValueEdit = this.currentSelectedItem.fullDetails;
       this.omItemsFormEdit.setValue(this.currentSelectedItem);
       this.currentIndex = index;
     }
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },

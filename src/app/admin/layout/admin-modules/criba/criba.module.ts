@@ -5,6 +5,7 @@ import { CribaRoutingModule } from './criba-routing.module';
 import { CribaComponent } from './criba.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditorModule } from '@progress/kendo-angular-editor';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CribaRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    EditorModule
   ]
 })
 export class CribaModule { }

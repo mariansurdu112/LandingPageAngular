@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OmRoutingModule } from './om-routing.module';
 import { OmComponent } from './om.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditorModule } from '@progress/kendo-angular-editor';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     OmRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EditorModule
   ]
 })
 export class OmModule { }

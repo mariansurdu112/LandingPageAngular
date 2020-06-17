@@ -50,6 +50,18 @@ export class ProfesorComponent implements OnInit {
   constructor(private modalService: NgbModal, private professorService: ProfesorService) {
     this.getData();
   }
+  public events: string[] = [];
+  public editorValueAdd: string;
+  public editorValueEdit: string;
+
+  public valueChange(arg: any, operation: number): void {
+    if (operation === 1) {
+      this.storyPointForm.controls.fullDetails.setValue(`${arg || ''}`);
+    } else {
+      this.storyPointFormEdit.controls.fullDetails.setValue(`${arg || ''}`);
+    }
+  }
+
   open(content: any, item?: any, index?: number) {
     if (this.profesorData) {
       this.proffesorForm.setValue({ mainTitle: this.profesorData.title, subTitle: this.profesorData.subtitle });
@@ -58,9 +70,10 @@ export class ProfesorComponent implements OnInit {
     if (item) {
       this.currentSelectedItem = item;
       this.storyPointFormEdit.setValue(this.currentSelectedItem);
+      this.editorValueEdit = this.currentSelectedItem.fullDetails;
       this.currentIndex = index;
     }
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },
@@ -149,7 +162,7 @@ export class ProfesorComponent implements OnInit {
     this.currentOperation = 1;
     this.dataOperation = data;
     this.eventsSubject.next();
-}
+  }
 
   saveStoryPointItemEdit(data: StoryItemModel) {
     this.currentOperation = 2;

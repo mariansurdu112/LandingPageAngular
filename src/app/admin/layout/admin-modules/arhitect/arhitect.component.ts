@@ -48,7 +48,18 @@ export class ArhitectComponent implements OnInit {
   constructor(private modalService: NgbModal, private architectService: ArhitectService, private photoService: PhotoService) {
     this.getData();
   }
+  public editorValueAdd: string;
+  public editorValueEdit: string;
+
+  public valueChange(arg: any, operation: number): void {
+    if (operation === 1) {
+      this.arhitectItemsForm.controls.description.setValue(`${arg || ''}`);
+    } else {
+      this.arhitectItemsFormEdit.controls.description.setValue(`${arg || ''}`);
+    }
+  }
   open(content: any, item?: any, index?: number) {
+    console.log('Open');
     if (this.arhitectData) {
       console.log(this.arhitectData);
       this.arhitectForm.setValue({ mainTitle: this.arhitectData.title, subTitle: this.arhitectData.subtitle });
@@ -56,10 +67,11 @@ export class ArhitectComponent implements OnInit {
 
     if (item) {
       this.currentSelectedItem = item;
+      this.editorValueEdit = this.currentSelectedItem.description;
       this.arhitectItemsFormEdit.setValue(this.currentSelectedItem);
       this.currentIndex = index;
     }
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },

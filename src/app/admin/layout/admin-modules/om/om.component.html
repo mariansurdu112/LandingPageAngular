@@ -65,6 +65,10 @@
          <textarea class="form-control" id="mainDescription" rows="3" placeholder="Main Description"
            id="mainDescription" formControlName="mainDescription"></textarea>
        </div>
+        <div class="form-group">
+          <kendo-editor [value]="editorValueAdd" (valueChange)="valueChange($event,1)" style="height: 200px;">
+          </kendo-editor>
+        </div>
        <div class="form-group">
          <label for="icon">Icon:</label>
          <input type="text" class="form-control" placeholder="Icon" id="icon" formControlName="icon">
@@ -96,6 +100,10 @@
          <textarea class="form-control" id="mainDescription" rows="3" placeholder="Main Description"
            id="mainDescription" formControlName="mainDescription"></textarea>
        </div>
+        <div class="form-group">
+          <kendo-editor [value]="editorValueEdit" (valueChange)="valueChange($event,2)" style="height: 200px;">
+          </kendo-editor>
+        </div>
        <div class="form-group">
          <label for="icon">Icon:</label>
          <input type="text" class="form-control" placeholder="Icon" id="icon" formControlName="icon">

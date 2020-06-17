@@ -7,6 +7,7 @@ import { ArhitectEditComponent } from './components/arhitect-edit/arhitect-edit.
 import { ArhitectEditItemComponent } from './components/arhitect-edit-item/arhitect-edit-item.component';
 import { ArhitectAddItemComponent } from './components/arhitect-add-item/arhitect-add-item.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EditorModule } from '@progress/kendo-angular-editor';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     ArhitectRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    EditorModule
   ]
 })
 export class ArhitectModule { }

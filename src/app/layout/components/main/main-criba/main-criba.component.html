@@ -39,8 +39,8 @@
               <li>Date: {{currentItem.date | date :'dd/MM/yyyy'}}</li>
               <li>{{currentItem.title}}</li>
               <li>{{currentItem.subtitle}}</li>
-              <li>{{currentItem.description}}</li>
             </ul>
+            <div [innerHtml]="currentItem.description"></div>
           </div>
         </div>
       </div>

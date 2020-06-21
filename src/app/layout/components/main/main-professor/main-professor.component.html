@@ -53,11 +53,29 @@
                   </div>
                 </li>
               </ul>
-              <ul class="list-inline">
-                <li>Start year: {{currentStoryItem.startYear}}</li>
-                <li>End year: {{currentStoryItem.endYear}}</li>
-                <li>{{currentStoryItem.mainDescription}}</li>
-              </ul>
+              <table class="table customColor">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{currentStoryItem.startYear}}</td>
+                    <td>{{currentStoryItem.endYear}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-dark customColor">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{currentStoryItem.mainDescription}}</td>
+                  </tr>
+                </tbody>
+              </table>
               <app-editor-view [data]="currentStoryItem.fullDetails"></app-editor-view>
             </div>
           </div>

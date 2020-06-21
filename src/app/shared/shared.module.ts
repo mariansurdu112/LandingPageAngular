@@ -15,6 +15,7 @@ import { PhotoService } from './services/photo.service';
 import { EditorViewComponent } from './components/editor-view/editor-view.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { NoItemsComponent } from './components/no-items/no-items.component';
+import { AuthService } from './services/auth.service';
 
 
 
@@ -27,7 +28,7 @@ import { NoItemsComponent } from './components/no-items/no-items.component';
     StatModule
   ],
   providers: [ArhitectService, CercetatorService, ContactService, CribaService,
-    DashboardService, OmService, ProfesorService, PhotoService],
+    DashboardService, OmService, ProfesorService, PhotoService, AuthService],
   exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent],
 })
 export class SharedModule { }

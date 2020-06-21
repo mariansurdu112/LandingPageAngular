@@ -32,14 +32,20 @@
       <div class="row">
         <div class="col-lg-12 mx-auto">
           <div class="modal-body">
-            <div class="portfolio-link">
-              <img class="img-fluid" src="{{getPhotoUrl(currentItem.photoId)}}" alt="">
+            <table class="table table-dark customColor">
+              <thead>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{currentItem.title}}</td>
+                  <td>{{currentItem.subtitle}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="containerImage">
+              <img class="img-fluid imgCustom radius" src="{{getPhotoUrl(currentItem.photoId)}}" alt="">
+              <div class="bottom-left">{{currentItem.date | date :'dd/MM/yyyy'}}</div>
             </div>
-            <ul class="list-inline">
-              <li>Date: {{currentItem.date | date :'dd/MM/yyyy'}}</li>
-              <li>{{currentItem.title}}</li>
-              <li>{{currentItem.subtitle}}</li>
-            </ul>
             <app-editor-view [data]="currentItem.description"></app-editor-view>
           </div>
         </div>

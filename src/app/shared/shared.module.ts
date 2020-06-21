@@ -14,11 +14,12 @@ import { PhotoUploadComponent } from './components/photo-upload/photo-upload.com
 import { PhotoService } from './services/photo.service';
 import { EditorViewComponent } from './components/editor-view/editor-view.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { NoItemsComponent } from './components/no-items/no-items.component';
 
 
 
 @NgModule({
-  declarations: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe],
+  declarations: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent],
   imports: [
     CommonModule,
     LanguageTranslationModule,
@@ -27,6 +28,6 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
   ],
   providers: [ArhitectService, CercetatorService, ContactService, CribaService,
     DashboardService, OmService, ProfesorService, PhotoService],
-  exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe],
+  exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent],
 })
 export class SharedModule { }

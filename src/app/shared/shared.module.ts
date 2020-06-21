@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { LanguageTranslationModule } from './modules/language-translation/language-translation.module';
 import { PageHeaderModule } from './modules/page-header/page-header.module';
 import { StatModule } from './modules/stat/stat.module';
-import { SharedPipesModule } from './pipes/shared-pipes.module';
 import { ArhitectService } from './services/arhitect.service';
 import { CercetatorService } from './services/cercetator.service';
 import { ContactService } from './services/contact.service';
@@ -13,20 +12,21 @@ import { OmService } from './services/om.service';
 import { ProfesorService } from './services/professor.service';
 import { PhotoUploadComponent } from './components/photo-upload/photo-upload.component';
 import { PhotoService } from './services/photo.service';
+import { EditorViewComponent } from './components/editor-view/editor-view.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 
 
 @NgModule({
-  declarations: [PhotoUploadComponent],
+  declarations: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe],
   imports: [
     CommonModule,
     LanguageTranslationModule,
     PageHeaderModule,
-    StatModule,
-    SharedPipesModule
+    StatModule
   ],
   providers: [ArhitectService, CercetatorService, ContactService, CribaService,
     DashboardService, OmService, ProfesorService, PhotoService],
-  exports: [PhotoUploadComponent],
+  exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe],
 })
 export class SharedModule { }

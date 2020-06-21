@@ -58,7 +58,7 @@
                 <li>End year: {{currentStoryItem.endYear}}</li>
                 <li>{{currentStoryItem.mainDescription}}</li>
               </ul>
-              <div [innerHtml]="currentStoryItem.fullDetails | safeHtml"></div>
+              <app-editor-view [data]="currentStoryItem.fullDetails"></app-editor-view>
             </div>
           </div>
         </div>

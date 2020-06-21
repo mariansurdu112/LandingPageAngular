@@ -23,7 +23,7 @@ export class MainCribaComponent implements OnInit {
 
   open(content: any, index: any) {
     this.currentItem = this.cribaData.items[index];
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },

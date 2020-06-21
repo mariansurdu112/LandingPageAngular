@@ -51,7 +51,6 @@
                   <div class="timeline-image">
                     <img class="rounded-circle img-fluid" [src]="getPhotoUrl(currentStoryItem.photoId)" alt="">
                   </div>
-
                 </li>
               </ul>
               <ul class="list-inline">
@@ -59,7 +58,7 @@
                 <li>End year: {{currentStoryItem.endYear}}</li>
                 <li>{{currentStoryItem.mainDescription}}</li>
               </ul>
-              <div [innerHtml]="currentStoryItem.fullDetails"></div>
+              <div [innerHtml]="currentStoryItem.fullDetails | safeHtml"></div>
             </div>
           </div>
         </div>
@@ -69,7 +68,4 @@
     <div class="modal-footer">
       <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
     </div>
-
-
-
   </ng-template>

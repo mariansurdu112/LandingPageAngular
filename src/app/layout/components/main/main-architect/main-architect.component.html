@@ -40,7 +40,7 @@
               <li>{{currentItem.title}}</li>
               <li>{{currentItem.subtitle}}</li>
             </ul>
-            <div [innerHtml]="currentItem.description"></div>
+            <div [innerHtml]="currentItem.description | safeHtml"></div>
           </div>
         </div>
       </div>

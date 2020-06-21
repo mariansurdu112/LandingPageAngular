@@ -95,9 +95,13 @@ export class ProfesorComponent implements OnInit {
   }
 
   public uploadFinished = (event: any) => {
-    console.log('Upload photo finished');
-    this.selectedPhotoId = event.photoId;
-    this.dataOperation.photoId = this.selectedPhotoId;
+    if (event !== 0) {
+      this.selectedPhotoId = event.photoId;
+      this.dataOperation.photoId = this.selectedPhotoId;
+    }
+    else {
+      this.dataOperation.photoId = this.profesorData.storyItems[this.currentIndex].photoId;
+    }
     if (this.currentOperation === 1) {
       this.dataOperation.professorId = this.profesorData.id;
       this.professorService.saveStoryPointItem(this.dataOperation).subscribe(res => {

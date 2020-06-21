@@ -21,7 +21,7 @@ export class MainOmComponent implements OnInit {
   open(content: any, index: number) {
     this.currentItem = this.omData.items[index];
     console.log(this.currentItem);
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },

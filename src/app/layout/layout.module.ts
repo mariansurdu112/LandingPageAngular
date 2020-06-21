@@ -22,14 +22,14 @@ import { MainContactComponent } from './components/main/main-contact/main-contac
 import { MainNavbarComponent } from './components/main/main-navbar/main-navbar.component';
 import { MainHeaderComponent } from './components/main/main-header/main-header.component';
 import { MainFooterComponent } from './components/main/main-footer/main-footer.component';
-import { MainProfessorComponent } from './components/main/main-professor/main-professor.component';
+import { MainProfessorComponent, SafeHtmlPipe } from './components/main/main-professor/main-professor.component';
 
 @NgModule({
   declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent,
     FooterComponent, AboutComponent, ClientsComponent, PortfolioComponent,
     ServicesComponent, TeamComponent, MainDashboardComponent, MainCercetatorComponent,
     MainArchitectComponent, MainOmComponent, MainCribaComponent, MainContactComponent,
-    MainNavbarComponent, MainHeaderComponent, MainFooterComponent, MainProfessorComponent],
+    MainNavbarComponent, MainHeaderComponent, MainFooterComponent, MainProfessorComponent, SafeHtmlPipe],
   imports: [
     CommonModule,
     LayoutRoutingModule,

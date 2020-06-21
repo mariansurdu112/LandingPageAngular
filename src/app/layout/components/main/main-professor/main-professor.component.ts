@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ProfesorSectionModel } from 'src/app/shared/models/professor-section.model';
 import { ProfesorService } from 'src/app/shared/services/professor.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-professor',
   templateUrl: './main-professor.component.html',
-  styleUrls: ['./main-professor.component.scss']
+  styleUrls: ['./main-professor.component.scss'],
 })
 export class MainProfessorComponent implements OnInit {
   profesorData: ProfesorSectionModel;
@@ -20,7 +21,7 @@ export class MainProfessorComponent implements OnInit {
 
   open(content: any, index: number) {
     this.currentStoryItem = this.profesorData.storyItems[index];
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },
@@ -62,6 +63,19 @@ export class MainProfessorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+}
+
+@Pipe({
+  name: 'safeHtml',
+})
+export class SafeHtmlPipe implements PipeTransform {
+
+  constructor(private sanitizer: DomSanitizer) { }
+
+  transform(html) {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
 }

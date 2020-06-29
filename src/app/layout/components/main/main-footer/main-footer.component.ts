@@ -6,8 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-footer.component.scss']
 })
 export class MainFooterComponent implements OnInit {
-
-  constructor() { }
+  timeout: any;
+  displayData = false;
+  constructor() {
+    this.timeout = setTimeout(() => {
+      this.displayData = true;
+      clearTimeout(this.timeout);
+    }, 2000);
+  }
 
   ngOnInit(): void {
   }

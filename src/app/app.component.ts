@@ -7,7 +7,6 @@ import { Meta } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
   title = 'Cristina Olga Gociman';
   constructor(private metaService: Meta) {
     this.metaService.addTags([

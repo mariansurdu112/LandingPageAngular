@@ -13,7 +13,7 @@
           <ul class="timeline">
             <li *ngFor="let storyItem of profesorData.storyItems; let i = index"
               [ngClass]="{'timeline-inverted':i%2!==0}">
-              <div class="timeline-image">
+              <div class="timeline-image" id="image">
                 <img class="rounded-circle img-fluid" [src]="getPhotoUrl(storyItem.photoId)" alt="">
               </div>
               <div class="timeline-panel">
@@ -96,7 +96,7 @@
             formControlName="fullDetails"></textarea>
         </div>
         <div class="form-group">
-          <kendo-editor [value]="editorValueAdd" (valueChange)="valueChange($event,1)" style="height: 200px;">
+          <kendo-editor [value]="editorValueAdd" (valueChange)="valueChange($event,1)" style="height: 500px;">
           </kendo-editor>
         </div>
         <app-photo-upload [editPhotoUrl]="" [events]="eventsSubject.asObservable()"
@@ -141,7 +141,7 @@
             formControlName="fullDetails"></textarea>
         </div>
         <div class="form-group">
-          <kendo-editor [value]="editorValueEdit" (valueChange)="valueChange($event,2)" style="height: 200px;">
+          <kendo-editor [value]="editorValueEdit" (valueChange)="valueChange($event,2)" style="height: 500px;">
           </kendo-editor>
         </div>
         <app-photo-upload *ngIf="currentSelectedItem" [editPhotoUrl]="getPhotoUrl(currentSelectedItem.photoId)"

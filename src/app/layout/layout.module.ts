@@ -23,13 +23,22 @@ import { MainNavbarComponent } from './components/main/main-navbar/main-navbar.c
 import { MainHeaderComponent } from './components/main/main-header/main-header.component';
 import { MainFooterComponent } from './components/main/main-footer/main-footer.component';
 import { MainProfessorComponent } from './components/main/main-professor/main-professor.component';
+import { MainActivitateAcademicaComponent } from './components/main/main-activitate-academica/main-activitate-academica.component';
+import { MainActivitatePublicataComponent } from './components/main/main-activitate-publicata/main-activitate-publicata.component';
+import { MainCrochiuComponent } from './components/main/main-crochiu/main-crochiu.component';
+import { MainManagementComponent } from './components/main/main-management/main-management.component';
+import { MainLucrariDeReferintaComponent } from './components/main/main-lucrari-de-referinta/main-lucrari-de-referinta.component';
+import { MainPremiiSiDistinctiiComponent } from './components/main/main-premii-si-distinctii/main-premii-si-distinctii.component';
 
 @NgModule({
   declarations: [HeaderComponent, NavbarComponent, LayoutComponent, HomeComponent,
     FooterComponent, AboutComponent, ClientsComponent, PortfolioComponent,
     ServicesComponent, TeamComponent, MainDashboardComponent, MainCercetatorComponent,
     MainArchitectComponent, MainOmComponent, MainCribaComponent, MainContactComponent,
-    MainNavbarComponent, MainHeaderComponent, MainFooterComponent, MainProfessorComponent],
+    MainNavbarComponent, MainHeaderComponent, MainFooterComponent,
+    MainProfessorComponent, MainActivitateAcademicaComponent,
+    MainActivitatePublicataComponent, MainManagementComponent,
+    MainLucrariDeReferintaComponent, MainPremiiSiDistinctiiComponent, MainCrochiuComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,

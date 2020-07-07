@@ -4,6 +4,7 @@ import { PortfolioItemModel } from 'src/app/shared/models/portfolio-item.model';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CribaService } from 'src/app/shared/services/criba.service';
 import { environment } from 'src/environments/environment';
+import { CrochiuService } from 'src/app/shared/services/crochiu.service';
 
 @Component({
   selector: 'app-main-crochiu',
@@ -14,7 +15,7 @@ export class MainCrochiuComponent implements OnInit {
   cribaData: CribaSectionModel;
   currentItem: PortfolioItemModel;
   closeResult: string;
-  constructor(private modalService: NgbModal, private architectService: CribaService) {
+  constructor(private modalService: NgbModal, private crochiuService: CrochiuService) {
     this.getData();
   }
 
@@ -45,7 +46,7 @@ export class MainCrochiuComponent implements OnInit {
   }
 
   getData() {
-    this.architectService.getData().subscribe(res => {
+    this.crochiuService.getData().subscribe(res => {
       console.log(res);
       this.cribaData = res[0][0];
       if (res[0].length === 0) {

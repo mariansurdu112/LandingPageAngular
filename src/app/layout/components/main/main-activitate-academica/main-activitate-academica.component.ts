@@ -31,7 +31,6 @@ export class MainActivitateAcademicaComponent implements OnInit {
   }
 
   getPhotoUrl(id: number) {
-    console.log(id);
     return environment.photoUrl + id;
   }
 

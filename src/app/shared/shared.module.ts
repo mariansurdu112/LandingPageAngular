@@ -16,6 +16,9 @@ import { EditorViewComponent } from './components/editor-view/editor-view.compon
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { NoItemsComponent } from './components/no-items/no-items.component';
 import { AuthService } from './services/auth.service';
+import { CercetatorSecondService } from './services/cercetator-second.service';
+import { ProfesorSecondService } from './services/professor-second.service';
+import { CrochiuService } from './services/crochiu.service';
 
 
 
@@ -27,8 +30,8 @@ import { AuthService } from './services/auth.service';
     PageHeaderModule,
     StatModule
   ],
-  providers: [ArhitectService, CercetatorService, ContactService, CribaService,
-    DashboardService, OmService, ProfesorService, PhotoService, AuthService],
-  exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent],
+  providers: [ArhitectService, CercetatorService, CercetatorSecondService, ContactService, CribaService,
+    DashboardService, OmService, ProfesorService, ProfesorSecondService, PhotoService, AuthService, CrochiuService],
+  exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent]
 })
 export class SharedModule { }

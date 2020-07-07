@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfesorSectionModel } from 'src/app/shared/models/professor-section.model';
 import { StoryItemModel } from 'src/app/shared/models/story-item.model';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ProfesorService } from 'src/app/shared/services/professor.service';
+import { ProfesorSecondService } from 'src/app/shared/services/professor-second.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,7 +14,7 @@ export class MainActivitatePublicataComponent implements OnInit {
   profesorData: ProfesorSectionModel;
   currentStoryItem: StoryItemModel;
   closeResult: string;
-  constructor(private modalService: NgbModal, private professorService: ProfesorService) {
+  constructor(private modalService: NgbModal, private professorService: ProfesorSecondService) {
     this.getData();
   }
 
@@ -31,7 +31,6 @@ export class MainActivitatePublicataComponent implements OnInit {
   }
 
   getPhotoUrl(id: number) {
-    console.log(id);
     return environment.photoUrl + id;
   }
 

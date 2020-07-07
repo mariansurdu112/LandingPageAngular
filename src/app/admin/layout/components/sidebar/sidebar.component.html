@@ -6,20 +6,31 @@
         </a>
         <a [routerLinkActive]="['router-link-active']" [routerLink]="['./profesor']" class="list-group-item">
             <i class="fa fa-fw fa-wrench"></i>&nbsp;
-            <span>{{ 'Professor' | translate }}</span>
+            <span>{{ 'Activitate academica' | translate }}</span>
         </a>
+          <a [routerLinkActive]="['router-link-active']" [routerLink]="['./profesor-second']" class="list-group-item">
+            <i class="fa fa-fw fa-wrench"></i>&nbsp;
+            <span>{{ 'Activitate publica' | translate }}</span>
+          </a>
         <a [routerLinkActive]="['router-link-active']" [routerLink]="['./cercetator']" class="list-group-item">
             <i class="fa fa-fw fa-wrench"></i>&nbsp;
-            <span>{{ 'Cercetator' | translate }}</span>
+            <span>{{ 'Management' | translate }}</span>
         </a>
-        <a [routerLinkActive]="['router-link-active']" [routerLink]="['./arhitect']" class="list-group-item">
-          <i class="fa fa-fw fa-wrench"></i>&nbsp;
-          <span>{{ 'Arhitect' | translate }}</span>
-        </a>
+        
         <a [routerLinkActive]="['router-link-active']" [routerLink]="['./om']" class="list-group-item">
             <i class="fa fa-fw fa-wrench"></i>&nbsp;
-            <span>{{ 'Om' | translate }}</span>
+            <span>{{ 'Lucrari de referinta' | translate }}</span>
         </a>
+
+        <a [routerLinkActive]="['router-link-active']" [routerLink]="['./cercetator-second']" class="list-group-item">
+          <i class="fa fa-fw fa-wrench"></i>&nbsp;
+          <span>{{ 'Premii si distinctii' | translate }}</span>
+        </a>
+        <a [routerLinkActive]="['router-link-active']" [routerLink]="['./crochiu']" class="list-group-item">
+             <i class="fa fa-fw fa-wrench"></i>&nbsp;
+             <span>{{ 'Crochiu' | translate }}</span>
+        </a>
+
         <a [routerLinkActive]="['router-link-active']" [routerLink]="['./criba']" class="list-group-item">
             <i class="fa fa-fw fa-wrench"></i>&nbsp;
             <span>{{ 'Criba' | translate }}</span>

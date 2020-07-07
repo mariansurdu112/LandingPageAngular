@@ -9,8 +9,8 @@
      <div class="row text-center">
        <div class="col-md-4" *ngFor="let item of omData.items;let i = index">
          <span class="fa-stack fa-4x" (click)="open(content,i)">
-           <i class="fas fa-circle fa-stack-2x text-primary"></i>
-           <i class="fas {{item.icon}} fa-stack-1x fa-inverse"></i>
+           <i class="fas fa-circle fa-stack-2x text-primary" style="color: white !important"></i>
+           <i class="fas {{item.icon}} fa-stack-1x fa-inverse" style="color:#212529"></i>
          </span>
          <h4 class="service-heading">{{item.title}}</h4>
          <p class="text-muted">{{item.mainDescription}}</p>
@@ -30,8 +30,8 @@
      <div class="row text-center">
        <div class="col-md-4 centered">
          <span class="fa-stack fa-4x">
-           <i class="fas fa-circle fa-stack-2x text-primary"></i>
-           <i class="fas {{currentItem.icon}} fa-stack-1x fa-inverse"></i>
+           <i class="fas fa-circle fa-stack-2x text-primary" style="color: white !important"></i>
+           <i class="fas {{currentItem.icon}} fa-stack-1x fa-inverse" style="color:#212529"></i>
          </span>
          <h4 class="service-heading">{{currentItem.title}}</h4>
          <p class="text-muted">{{currentItem.mainDescription}}</p>

@@ -10,7 +10,8 @@ import { EditorModule } from '@progress/kendo-angular-editor';
 
 
 @NgModule({
-  declarations: [CercetatorComponent, CercetatorEditComponent, CercetatorItemAddComponent, CercetatorEditItemComponent],
+  declarations: [CercetatorComponent, CercetatorEditComponent, CercetatorItemAddComponent,
+     CercetatorEditItemComponent],
   imports: [
     CommonModule,
     CercetatorRoutingModule,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceItem } from 'src/app/shared/models/service-item.model';
 import { CercetatorSectionModel } from 'src/app/shared/models/cercetator-section.model';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { CercetatorService } from 'src/app/shared/services/cercetator.service';
+import { CercetatorSecondService } from 'src/app/shared/services/cercetator-second.service';
 
 @Component({
   selector: 'app-main-premii-si-distinctii',
@@ -13,7 +13,7 @@ export class MainPremiiSiDistinctiiComponent implements OnInit {
   closeResult: string;
   currentItem: ServiceItem;
   cercetatorData: CercetatorSectionModel;
-  constructor(private modalService: NgbModal, private cercetatorService: CercetatorService) {
+  constructor(private modalService: NgbModal, private cercetatorService: CercetatorSecondService) {
     this.getData();
   }
   open(content: any, index: number) {

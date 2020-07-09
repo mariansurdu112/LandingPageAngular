@@ -7,7 +7,7 @@
        </div>
      </div>
      <div class="row text-center">
-       <div class="col-md-4" *ngFor="let item of cercetatorData.items;let i = index">
+       <div class="col-md-6" *ngFor="let item of cercetatorData.items;let i = index">
          <span class="fa-stack fa-4x" (click)="open(content,i)">
            <i class="fas fa-circle fa-stack-2x text-primary" style="color: white !important"></i>
            <i class="fas {{item.icon}} fa-stack-1x fa-inverse" style="color: #bababa;"></i>

@@ -21,7 +21,7 @@ export class CrochiuComponent implements OnInit {
   currentOperation: number;
   dataOperation: any;
   eventsSubject: Subject<any> = new Subject<any>();
-
+  photos: any;
   crochiuData: CribaSectionModel;
   crochiuForm = new FormGroup({
     mainTitle: new FormControl('', Validators.required),
@@ -33,7 +33,8 @@ export class CrochiuComponent implements OnInit {
     photoId: new FormControl(''),
     description: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
-    crochiuId: new FormControl('')
+    crochiuId: new FormControl(''),
+    photos: new FormControl('')
   });
   crochiuItemsFormEdit = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -43,7 +44,8 @@ export class CrochiuComponent implements OnInit {
     date: new FormControl('', Validators.required),
     crochiuId: new FormControl(''),
     id: new FormControl(''),
-    rowVersion: new FormControl('')
+    rowVersion: new FormControl(''),
+    photos: new FormControl('')
 
   });
   closeResult: string;

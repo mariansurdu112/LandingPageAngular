@@ -19,19 +19,24 @@ import { AuthService } from './services/auth.service';
 import { CercetatorSecondService } from './services/cercetator-second.service';
 import { ProfesorSecondService } from './services/professor-second.service';
 import { CrochiuService } from './services/crochiu.service';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { PhotoUploadMultipleComponent } from './components/photo-upload-multiple/photo-upload-multiple.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @NgModule({
-  declarations: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent],
+  declarations: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe,
+     NoItemsComponent, CarouselComponent, PhotoUploadMultipleComponent],
   imports: [
     CommonModule,
     LanguageTranslationModule,
     PageHeaderModule,
-    StatModule
+    StatModule,
+    NgbModule
   ],
   providers: [ArhitectService, CercetatorService, CercetatorSecondService, ContactService, CribaService,
     DashboardService, OmService, ProfesorService, ProfesorSecondService, PhotoService, AuthService, CrochiuService],
-  exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent]
+  exports: [PhotoUploadComponent, EditorViewComponent, SafeHtmlPipe, NoItemsComponent, CarouselComponent, PhotoUploadMultipleComponent]
 })
 export class SharedModule { }

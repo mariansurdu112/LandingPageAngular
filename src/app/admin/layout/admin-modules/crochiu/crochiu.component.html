@@ -1,5 +1,6 @@
 <button class="btn btn-info" (click)="open(contentEdit)">Edit</button>
 <button class="btn btn-success" (click)="open(contentPortfolio)">Add new data</button>
+ <button class="btn btn-danger" (click)="open(contentAddPhotos)">Add photos</button>
 <section class="bg-light page-section" id="portfolio" *ngIf="crochiuData">
   <div class="container">
     <div class="row">
@@ -40,6 +41,7 @@
             <!-- Project Details Go Here -->
             <h2 class="text-uppercase">{{currentSelectedItem.title}}</h2>
             <p class="item-intro text-muted">{{currentSelectedItem.subtitle}}</p>
+            <!-- <app-carousel [photos]="currentSelectedItem.photos"></app-carousel> -->
             <img class="img-fluid d-block mx-auto" src="{{getPhotoUrl(currentSelectedItem.photoId)}}" alt="">
             <p>{{currentSelectedItem.description}}</p>
             <ul class="list-inline">
@@ -79,7 +81,19 @@
       <button type="submit" class="btn btn-primary" [disabled]="!crochiuForm.valid">Save</button>
     </form>
   </div>
+  <div class="modal-footer">
+    <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+  </div>
+</ng-template>
 
+<ng-template #contentAddPhotos let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <p>Add photos</p>
+  </div>
+  <div class="modal-body">
+    <app-photo-upload-multiple [events]="eventsSubject.asObservable()" (onUploadFinished)="uploadFinished($event)">
+    </app-photo-upload-multiple>
+  </div>
   <div class="modal-footer">
     <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
   </div>
